@@ -3,7 +3,7 @@
 
 
 
-## Team members:
+## Team members
 
 
 	_Photo under construction_
@@ -30,7 +30,13 @@
 	Dani has been in charge of ...
 
 
-## Credits:
+
+***
+
+
+
+
+## Credits
 
 Art and Music from the original game:
 
@@ -43,6 +49,10 @@ Development:
 	Núria Lamonja
 
 	Dani Ruiz
+
+
+
+***
 
 
 
@@ -59,11 +69,23 @@ It has been done only for educational purposes
 		_under construction_
 
 
+
+***
+
+
+
+
 ## Gameplay
 
 A sneak peak to our game featuring main debug functionality.
 
 _under construction_
+
+
+
+
+***
+
 
 
 
@@ -75,6 +97,11 @@ Enjoy!
 
 
 
+***
+
+
+
+
 ## Download to the latest release
 
 Here you can go to the release page and download the different versions available. Just click on the release, unzip it once downloaded and you can play clicking the Application.
@@ -82,6 +109,13 @@ Instructions can be found in this same web page or in the readme.md file include
 
 
 [Releases](https://github.com/Needlesslord/PHYSICS2-Pinball/releases)
+
+
+
+
+***
+
+
 
 
 ## Usage
@@ -104,6 +138,11 @@ DEBUG:
 
 
 
+***
+
+
+
+
 ## Disclosure
 
 This is a game made by two second year students of the Videogame Design and Development degree taught at CITM.
@@ -118,13 +157,27 @@ It has been done only for educational purposes
 The game has been made using C++ and Box2D. 
 
 
+
+
+***
+
+
+
+
 ## Links
 
 [Github](https://github.com/Needlesslord/PHYSICS2-Pinball): https://github.com/Needlesslord/PHYSICS2-Pinball
 
 [Releases of this game](https://github.com/Needlesslord/PHYSICS2-Pinball/releases): https://github.com/Needlesslord/PHYSICS2-Pinball/releases
 
-[Our web page](https://needlesslord.github.io/Platformer_GD/): https://needlesslord.github.io/Platformer_GD/
+[Our web page](https://needlesslord.github.io/PHYSICS2-Pinball/): https://needlesslord.github.io/PHYSICS2-Pinball/
+
+
+
+
+***
+
+
 
 
 ## License
