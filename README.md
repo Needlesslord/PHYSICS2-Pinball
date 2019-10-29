@@ -13,31 +13,35 @@
 
 	GitHub: tomascarreras1000
 
-	Tomás has been in charge of 
+	Tomás has been in charge of ...
 
 
 **Programmer and Management:** Núria Lamonja
 
 	GitHub:	 needlesslord
 
-	Núria has been in charge of 
+	Núria has been in charge of ...
 
 
-**Programmer:** Núria Lamonja
+**Programmer:** Dani Ruiz
 
-	GitHub:	 needlesslord
+	GitHub:	 xsiro
 
-	Dani has been in charge of 
+	Dani has been in charge of ...
 
 
 ## Credits:
 
 Art and Music from the original game:
+
 	[Pinball Droid](https://www.classicgame.com/game/Pinball+Droid)
 
 Development: 
+
 	Tomás Carreras
+
 	Núria Lamonja
+
 	Dani Ruiz
 
 
@@ -46,6 +50,8 @@ Development:
 ## Pinball Droid: The Game
 
 It's a recreation of an browser pinball called [Pinball Droid](https://www.classicgame.com/game/Pinball+Droid), which you can find here: https://www.classicgame.com/game/Pinball+Droid
+
+
 It has been done only for educational purposes
 
 	MAIN DIFFERENCES:
@@ -96,21 +102,19 @@ DEBUG:
 	F1 Draws all the shapes and allows mouse joint
 
 
-## Content
-
-	_under construction_
-
-
-	### Innovation
-
-		Not implemented yet
 
 
 ## Disclosure
 
 This is a game made by two second year students of the Videogame Design and Development degree taught at CITM.
+
+
 It's a recreation of an browser pinball called [Pinball Droid](https://www.classicgame.com/game/Pinball+Droid), which you can find here: https://www.classicgame.com/game/Pinball+Droid
+
+
 It has been done only for educational purposes
+
+
 The game has been made using C++ and Box2D. 
 
 
