@@ -56,9 +56,7 @@ It has been done only for educational purposes
 
 ## Credits
 
-Art and Music from the original game:
-
-	[Pinball Droid](https://www.classicgame.com/game/Pinball+Droid)
+Art and Music from the original game: [Pinball Droid](https://www.classicgame.com/game/Pinball+Droid)
 
 Development: 
 
