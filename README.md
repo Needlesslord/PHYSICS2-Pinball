@@ -1,3 +1,21 @@
+***
+
+
+
+
+## Pinball Droid: The Game
+
+It's a recreation of an browser pinball called [Pinball Droid](https://www.classicgame.com/game/Pinball+Droid), which you can find here: https://www.classicgame.com/game/Pinball+Droid
+
+
+It has been done only for educational purposes
+
+	MAIN DIFFERENCES:
+
+		_under construction_
+
+
+
 
 ***
 
@@ -50,23 +68,6 @@ Development:
 
 	Dani Ruiz
 
-
-
-***
-
-
-
-
-## Pinball Droid: The Game
-
-It's a recreation of an browser pinball called [Pinball Droid](https://www.classicgame.com/game/Pinball+Droid), which you can find here: https://www.classicgame.com/game/Pinball+Droid
-
-
-It has been done only for educational purposes
-
-	MAIN DIFFERENCES:
-
-		_under construction_
 
 
 
