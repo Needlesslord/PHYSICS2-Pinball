@@ -53,7 +53,7 @@ bool ModulePhysics::Start()
 	circleBody->CreateFixture(&circleFixture);
 
 
-
+	// HOMEWORK
 	b2BodyDef boxDef;
 	boxDef.type = b2_staticBody;
 	boxDef.position.Set(PIXEL_TO_METERS(0), PIXEL_TO_METERS(SCREEN_HEIGHT * 19 / 20));// X & Y

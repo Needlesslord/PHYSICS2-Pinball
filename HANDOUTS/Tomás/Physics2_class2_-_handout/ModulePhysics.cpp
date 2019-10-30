@@ -3,9 +3,8 @@
 #include "ModuleInput.h"
 #include "ModuleRender.h"
 #include "ModulePhysics.h"
+#include "p2Point.h"
 #include "math.h"
-
-#include "Box2D/Box2D/Box2D.h"
 
 #ifdef _DEBUG
 #pragma comment( lib, "Box2D/libx86/Debug/Box2D.lib" )
@@ -59,67 +58,85 @@ update_status ModulePhysics::PreUpdate()
 	return UPDATE_CONTINUE;
 }
 
-// 
-update_status ModulePhysics::PostUpdate()
-{
-	// On space bar press, create a circle on mouse position
-	if(App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius) {
+	b2BodyDef body;
+	body.type = b2_dynamicBody;
+	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
+
+	b2Body* b = world->CreateBody(&body);
+
+	b2CircleShape shape;
+	shape.m_radius = PIXEL_TO_METERS(radius);
+	b2FixtureDef fixture;
+	fixture.shape = &shape;
+	fixture.density = 1.0f;
+
+	b->CreateFixture(&fixture);
+
+	PhysBody* pbody = new PhysBody();
+	pbody->body = b;
+	pbody->width = pbody->height = radius;
+
+	return pbody;
+}
+
+PhysBody* ModulePhysics::CreateRectangle(int x, int y, int w, int h) {
+	b2BodyDef body;
+	body.type = b2_dynamicBody;
+	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
+
+	b2Body* b = world->CreateBody(&body);
+	b2PolygonShape shape;
+	shape.SetAsBox(PIXEL_TO_METERS(w), PIXEL_TO_METERS(h));
+
+	b2FixtureDef fixture;
+	fixture.shape = &shape;
+	fixture.density = 1.0;
+
+	b->CreateFixture(&fixture);
+
+	PhysBody* pbody = new PhysBody();
+	pbody->body = b;
+	pbody->width = w * 0.5f;
+	pbody->height = w * 0.5f;
+
+	return pbody;
+}
+
+PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int count) {
+	b2BodyDef body;
+	body.type = b2_dynamicBody;
+	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
+
+	b2Body* b = world->CreateBody(&body);
+	b2ChainShape shape;
+	b2Vec2* p = new b2Vec2[count / 2];
+
+	for (uint i = 0; i < count / 2; ++i)
 	{
-		b2BodyDef body;
-		body.type = b2_dynamicBody;
-		float radius = PIXEL_TO_METERS(25);
-		body.position.Set(PIXEL_TO_METERS(App->input->GetMouseX()), PIXEL_TO_METERS(App->input->GetMouseY()));
-
-		b2Body* b = world->CreateBody(&body);
-
-		b2CircleShape shape;
-		shape.m_radius = radius;
-		b2FixtureDef fixture;
-		fixture.shape = &shape;
-
-		b->CreateFixture(&fixture);
+		p[i].x = PIXEL_TO_METERS(points[i * 2 + 0]);
+		p[i].y = PIXEL_TO_METERS(points[i * 2 + 1]);
 	}
+	shape.CreateLoop(p, count / 2);
 
-	if(App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
-	{
-		// TODO 1: When pressing 2, create a box on the mouse position
-		b2BodyDef body;
-		body.type = b2_dynamicBody;
-		
+	b2FixtureDef fixture;
+	fixture.shape = &shape;
 
-		// TODO 2: To have the box behave normally, set fixture's density to 1.0f
-	}
+	b->CreateFixture(&fixture);
 
-	if(App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
-	{
-		// TODO 3: Create a chain shape using those vertices
-		// remember to convert them from pixels to meters!
-		/*
-		int points[24] = {
-			-38, 80,
-			-44, -54,
-			-16, -60,
-			-16, -17,
-			19, -19,
-			19, -79,
-			61, -77,
-			57, 73,
-			17, 78,
-			20, 16,
-			-25, 13,
-			-9, 72
-		};
-		*/
-	}
+	PhysBody* pbody = new PhysBody();
+	pbody->body = b;
+	pbody->width = pbody->height = 0;
 
-	if(App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
+	return pbody;
+}
+
+update_status ModulePhysics::PostUpdate() {
+	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 		debug = !debug;
 
-	if(!debug)
+	if (!debug)
 		return UPDATE_CONTINUE;
-
-	// Bonus code: this will iterate all objects in the world and draw the circles
-	// You need to provide your own macro to translate meters to pixels
 	for(b2Body* b = world->GetBodyList(); b; b = b->GetNext())
 	{
 		for(b2Fixture* f = b->GetFixtureList(); f; f = f->GetNext())
@@ -204,3 +221,23 @@ bool ModulePhysics::CleanUp()
 
 	return true;
 }
+
+void PhysBody::GetPosition(int& x, int &y) const
+{
+	b2Vec2 pos = body->GetPosition();
+	x = METERS_TO_PIXELS(pos.x) - (width);
+	y = METERS_TO_PIXELS(pos.y) - (height);
+}
+float PhysBody::GetRotation() const
+{
+	return RADTODEG * body->GetAngle();
+}
+
+bool PhysBody::Contains(int x, int y) const
+{
+	// TODO 1: Write the code to return true in case the point
+	// is inside ANY of the shapes contained by this body
+
+	return false;
+}
+
