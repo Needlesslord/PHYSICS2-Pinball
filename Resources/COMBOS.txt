@@ -1,0 +1,27 @@
+Combos:
+
+If you hit a Light you get 500 points.
+If you hit the 3 Lights in the same row you get 1500 points and a Letter gets active.
+You you hit the big light in the high part of the map 20k Points hole gets open.
+If you fall into a deactivated hole, you get 1k points.
+If you pass through arrows you activate 5k or 10k holes, depending on the arrows.
+If you hit the bouncers or the tiangles you get 200 points.
+If you active 1 light point of the start of the map you get 500 points.
+If you active all 3 lights points of the begining of the map, you get x2 combo everytime you do it. If you acomplish to get to HELD, you get x20 bonus.
+
+CORRECTOS:
+Luz de arriba salida: 200
+Los puntos van de 200 en 200
+Cuando se activa el Bonus x2 van 400 en 400
+Los agujeros del x5 etc dan 1000 puntos si no están activados
+los bouncers ("palos") dan 500
+el x2 se activa con las 3 luces del principio del mapa
+Cuando una fila de luces se activa, letra blanca aparece y te dan 3000 puntos
+Cuando mueres, los bonus se desactivan
+cada set de flechas da 500 puntos y se activan al recorrerlos enteros, en caso de las de arriba al recorrer los dos sets
+Triángulos 200 
+luz de fila de luces 200
+flechas arriba derecha activa x5 salida, arriba izquierda activa x5 arriba, flechas solas activa x10
+luz superior entre las flechas y x5 activa el x20 de abajo
+
+
