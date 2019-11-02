@@ -179,7 +179,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB) {
 
 }
 bool ModuleSceneIntro::LoadMap() {
-	ball = App->physics->CreateCircle(SCREEN_WIDTH/2, 0, 10);
+	ball = App->physics->CreateCircle(SCREEN_WIDTH / 2, 0, 10);
 	numLives = 3;
 	death = App->physics->CreateRectangleSensor(0, 700, SCREEN_WIDTH * 2, 1);
 	return true;
