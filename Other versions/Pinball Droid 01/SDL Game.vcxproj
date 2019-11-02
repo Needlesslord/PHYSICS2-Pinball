@@ -76,6 +76,7 @@
     <ClInclude Include="ModulePhysics.h" />
     <ClInclude Include="ModuleSceneLoading.h" />
     <ClInclude Include="ModuleScenePlay.h" />
+    <ClInclude Include="p2Animation.h" />
     <ClInclude Include="p2List.h" />
     <ClInclude Include="Module.h" />
     <ClInclude Include="ModuleAudio.h" />

@@ -68,6 +68,9 @@
     <ClInclude Include="ModuleFadeToBlack.h">
       <Filter>Help Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="p2Animation.h">
+      <Filter>Header Files\Containers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
