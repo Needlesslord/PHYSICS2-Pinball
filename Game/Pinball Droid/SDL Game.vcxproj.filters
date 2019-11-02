@@ -12,6 +12,9 @@
     <Filter Include="Header Files\Containers">
       <UniqueIdentifier>{97c4111e-b102-4ba8-9053-6f07ccbbe3d4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="UI+Fonts">
+      <UniqueIdentifier>{3df6bb9c-8145-4366-8d31-63d40fa77717}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -56,6 +59,12 @@
     <ClInclude Include="ModulePhysics.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleFonts.h">
+      <Filter>UI+Fonts</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleUI.h">
+      <Filter>UI+Fonts</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -90,6 +99,12 @@
     </ClCompile>
     <ClCompile Include="ModulePhysics.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleFonts.cpp">
+      <Filter>UI+Fonts</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleUI.cpp">
+      <Filter>UI+Fonts</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
