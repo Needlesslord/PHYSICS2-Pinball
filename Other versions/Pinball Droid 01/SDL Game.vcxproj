@@ -71,6 +71,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
+    <ClInclude Include="ChainListElements.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="ModuleFadeToBlack.h" />
     <ClInclude Include="ModulePhysics.h" />

@@ -102,6 +102,10 @@ public:
 		loops = 0;
 	}
 
+	int SeeCurrentFrame() {
+		return (int)current_frame;
+	}
+
 	//Added methods--------------------------------------------------------------------------------
 
 	SDL_Rect& GetFrame()
