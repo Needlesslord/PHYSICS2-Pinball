@@ -16,9 +16,12 @@ Cuando se activa el Bonus x2 van 400 en 400
 Los agujeros del x5 etc dan 1000 puntos si no están activados
 los bouncers ("palos") dan 500
 el x2 se activa con las 3 luces del principio del mapa
+	si se vuelve a activas tienes un x4, x6 respectivamente, es decir, es acumulable dentro de la misma bola
+	si llegas a HELD, es decir, lo haces 6 veces, consigues un x20
 Cuando una fila de luces se activa, letra blanca aparece y te dan 3000 puntos
 Cuando mueres, los bonus se desactivan
 cada set de flechas da 500 puntos y se activan al recorrerlos enteros, en caso de las de arriba al recorrer los dos sets
+	Si estás a punto de dar la vuelta pero vuelves atrás, se iluminan las otras flechas de dirección, las que indican el movimiento de caída
 Triángulos 200 
 luz de fila de luces 200
 flechas arriba derecha activa x5 salida, arriba izquierda activa x5 arriba, flechas solas activa x10
