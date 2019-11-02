@@ -12,9 +12,6 @@
     <Filter Include="Header Files\Containers">
       <UniqueIdentifier>{97c4111e-b102-4ba8-9053-6f07ccbbe3d4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Help Scenes">
-      <UniqueIdentifier>{875d2f4e-715e-4981-b385-a17c6fdba85a}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -59,15 +56,6 @@
     <ClInclude Include="ModulePhysics.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleScenePlay.h">
-      <Filter>Help Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleSceneLoading.h">
-      <Filter>Help Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleFadeToBlack.h">
-      <Filter>Help Scenes</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -102,15 +90,6 @@
     </ClCompile>
     <ClCompile Include="ModulePhysics.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleScenePlay.cpp">
-      <Filter>Help Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleSceneLoading.cpp">
-      <Filter>Help Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleFadeToBlack.cpp">
-      <Filter>Help Scenes</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
