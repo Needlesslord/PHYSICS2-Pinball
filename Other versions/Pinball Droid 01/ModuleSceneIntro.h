@@ -3,6 +3,8 @@
 #include "p2List.h"
 #include "p2Point.h"
 #include "Globals.h"
+#include "p2Animation.h"
+
 
 class PhysBody;
 
@@ -45,14 +47,17 @@ public:
 	SDL_Texture* assets;
 
 	//plunger
+	p2Animation			plungerlight;
 	PhysBody*			plunger;
 	b2PrismaticJoint*   plunger_joint;
 	uint				plunger_fx;
 	//flippers
 	PhysBody*			right_flipper;
 	PhysBody*			left_flipper;
+	PhysBody*			left_up_flipper;
 	b2RevoluteJoint*    right_joint;
 	b2RevoluteJoint*    left_joint;
+	b2RevoluteJoint*    left_up_joint;
 	uint				flipper_fx;
 
 

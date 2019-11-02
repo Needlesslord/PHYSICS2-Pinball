@@ -6,6 +6,7 @@
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
 #include "ModulePhysics.h"
+#include "ChainListElements.h"
 
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -39,6 +40,7 @@ bool ModuleSceneIntro::Start()
 	assets = App->textures->Load("pinball/assets.png");
 
 	//plunger
+	plungerlight.PushBack({ 1010, 731, 57, 63 });					//Needs coords
 	plunger_fx = App->audio->LoadFx("pinball/plunger.wav");
 	//flippers
 	flipper_fx = App->audio->LoadFx("pinball/flipper.wav");
@@ -67,9 +69,9 @@ update_status ModuleSceneIntro::PreUpdate()
 	if (!death)
 	{
 		if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_Z) == KEY_REPEAT) {
-
-
 			left_flipper->body->ApplyAngularImpulse(-2.0F, true);
+			left_up_flipper->body->ApplyAngularImpulse(-2.0F, true);
+
 		}
 
 		if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN || App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
@@ -79,12 +81,12 @@ update_status ModuleSceneIntro::PreUpdate()
 
 		if (App->input->GetKey(SDL_SCANCODE_RIGHT == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_M) == KEY_REPEAT)) {
 
-
 			right_flipper->body->ApplyAngularImpulse(2.0F, true);
 		}
 
 		if (App->input->GetKey(SDL_SCANCODE_DOWN || App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) == KEY_REPEAT)
 		{
+			App->renderer->Blit(assets, 253, 256, &(plungerlight.GetCurrentFrame()));
 			plunger_joint->SetMotorSpeed((0.0F, 1.0F));
 		}
 
@@ -273,8 +275,11 @@ bool ModuleSceneIntro::LoadMap()
 
 	//MAP--------------------
 
+	b2PrismaticJointDef jointDef;
+	b2Vec2 worldAxis(0.0f, 1.0f);
+
 	//plunger
-	plunger = App->physics->CreateChain(0, 0, plunger, 10);
+	plunger = App->physics->CreateChain(0, 0, plungerchain, 10);
 	jointDef.Initialize(App->physics->ground, plunger->body, { 422, 742 }, worldAxis);
 	plunger_joint = (b2PrismaticJoint*)App->physics->world->CreateJoint(&jointDef);
 
