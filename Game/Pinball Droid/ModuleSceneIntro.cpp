@@ -179,69 +179,97 @@ bool ModuleSceneIntro::LoadMap() {
 	//BALL FIRST
 	ball = App->physics->CreateCircle(initialPosition.x, initialPosition.y, 15);
 	ball->body->SetBullet(true);
-	ball->body->GetFixtureList()->SetFriction(0.4f);
+	ball->body->GetFixtureList()->SetFriction(0.5f);
 	ball->listener = this;
 	numLives = 3;
 
 	//BACKGROUND
-	background = App->physics->CreateChain(0, 0, Background, 180);
+	background				= App->physics->CreateChain(0, 0, Background, 180);
 	background->body->SetType(b2_staticBody);
-	backgroundL = App->physics->CreateChain(0, 0, BackgroundL, 14);
-	backgroundL->body->SetType(b2_staticBody);
-	backgroundR = App->physics->CreateChain(0, 0, BackgroundR, 18);
-	backgroundR->body->SetType(b2_staticBody);
-	chainL = App->physics->CreateChain(0, 0, ChainL, 16);
-	chainL->body->SetType(b2_staticBody);
-	chainR = App->physics->CreateChain(0, 0, ChainR, 22);
-	chainR->body->SetType(b2_staticBody);
-	backgroundU = App->physics->CreateChain(0, 0, BackgroundU, 20);
-	backgroundU->body->SetType(b2_staticBody);
-	backgroundLine = App->physics->CreateChain(0, 0, BackgroundLine, 8);
-	backgroundLine->body->SetType(b2_staticBody);
-	pivoteUR = App->physics->CreateChain(0, 0, PivoteUR, 42);
-	pivoteUR->body->SetType(b2_staticBody);
-	pivoteUL = App->physics->CreateChain(0, 0, PivoteUL, 40);
-	pivoteUL->body->SetType(b2_staticBody);
-	pivoteU = App->physics->CreateChain(0, 0, PivoteU, 46);
-	pivoteU->body->SetType(b2_staticBody);
-	pivoteL = App->physics->CreateChain(0, 0, PivoteL, 54);
-	pivoteL->body->SetType(b2_staticBody);
-	bouncyL = App->physics->CreateChain(0, 0, BouncyL, 8);
-	bouncyL->body->SetType(b2_staticBody);
-	bouncyR = App->physics->CreateChain(0, 0, BouncyR, 8);
-	bouncyR->body->SetType(b2_staticBody);
-	barraL = App->physics->CreateChain(0, 0, BarraL, 12);
-	barraL->body->SetType(b2_staticBody);
-	barraR = App->physics->CreateChain(0, 0, BarraR, 12);
-	barraR->body->SetType(b2_staticBody);
-	hole1 = App->physics->CreateChain(0, 0, Hole1, 12);
-	hole1->body->SetType(b2_staticBody);
-	hole2 = App->physics->CreateChain(0, 0, Hole2, 10);
-	hole2->body->SetType(b2_staticBody);
-	hole3 = App->physics->CreateChain(0, 0, Hole3, 14);
-	hole3->body->SetType(b2_staticBody);
-	hole4 = App->physics->CreateChain(0, 0, Hole4, 12);
-	hole4->body->SetType(b2_staticBody);
-	light1 = App->physics->CreateChain(0, 0, Light1, 12);
-	light1->body->SetType(b2_staticBody);
-	light2 = App->physics->CreateChain(0, 0, Light2, 10);
-	light2->body->SetType(b2_staticBody);
-	light3 = App->physics->CreateChain(0, 0, Light3, 10);
-	light3->body->SetType(b2_staticBody);
-	light4 = App->physics->CreateChain(0, 0, Light4, 8);
-	light4->body->SetType(b2_staticBody);
-	light5 = App->physics->CreateChain(0, 0, Light5, 12);
-	light5->body->SetType(b2_staticBody);
-	light6 = App->physics->CreateChain(0, 0, Light6, 12);
-	light6->body->SetType(b2_staticBody);
-	light7 = App->physics->CreateChain(0, 0, Light7, 12);
-	light7->body->SetType(b2_staticBody);
-	light8 = App->physics->CreateChain(0, 0, Light8, 10);
-	light8->body->SetType(b2_staticBody);
-	light9 = App->physics->CreateChain(0, 0, Light9, 12);
-	light9->body->SetType(b2_staticBody);
-	light10 = App->physics->CreateChain(0, 0, Light10, 12);
-	light10->body->SetType(b2_staticBody);
+
+	triangleLeft			= App->physics->CreateChain(0, 0, BackgroundL, 14);//TRIANGLE LEFT
+	triangleLeft->body->SetType(b2_staticBody);
+
+	triangleRight			= App->physics->CreateChain(0, 0, BackgroundR, 18);//TRIANGLE RIGHT
+	triangleRight->body->SetType(b2_staticBody);
+
+	curvePostTriangleLeft	= App->physics->CreateChain(0, 0, ChainL, 16);//CURVE POST TRIANGLE LEFT
+	curvePostTriangleLeft->body->SetType(b2_staticBody);
+
+	curvePostTriangleRight	= App->physics->CreateChain(0, 0, ChainR, 22);//CURVE POST TRIANGLE RIGHT
+	curvePostTriangleRight->body->SetType(b2_staticBody);
+
+	topFlipperBase			= App->physics->CreateChain(0, 0, BackgroundU, 20);//TOP FLIPPER BASE
+	topFlipperBase->body->SetType(b2_staticBody);
+
+	threeButtonStick		= App->physics->CreateChain(0, 0, BackgroundLine, 8);//THREE BUTTONS STICK
+	threeButtonStick->body->SetType(b2_staticBody);
+
+	bouncerTriangleLeft		= App->physics->CreateChain(0, 0, PivoteUR, 42);//BOUNCER TOP - MID
+	bouncerTriangleLeft->body->SetType(b2_staticBody);
+
+	bouncerTriangleRight	= App->physics->CreateChain(0, 0, PivoteUL, 40);//BOUNCER TOP-RIGHT
+	bouncerTriangleRight->body->SetType(b2_staticBody);
+
+	bouncerTopLeft			= App->physics->CreateChain(0, 0, PivoteU, 46);//BOUNCER TOP - LEFT / LONE BOUNCER
+	bouncerTopLeft->body->SetType(b2_staticBody);
+
+	bouncerTriangleBot		= App->physics->CreateChain(0, 0, PivoteL, 54);//BOUNCER BOT
+	bouncerTriangleBot->body->SetType(b2_staticBody);
+
+	triangleLeftBouncer		= App->physics->CreateChain(0, 0, BouncyL, 8);
+	triangleLeftBouncer->body->SetType(b2_staticBody);
+
+	triangleRightBouncer	= App->physics->CreateChain(0, 0, BouncyR, 8);
+	triangleRightBouncer->body->SetType(b2_staticBody);
+
+	doubleBonusLeftBar		= App->physics->CreateChain(0, 0, BarraL, 12);
+	doubleBonusLeftBar->body->SetType(b2_staticBody);
+
+	doubleBonusRightBar		= App->physics->CreateChain(0, 0, BarraR, 12);
+	doubleBonusRightBar->body->SetType(b2_staticBody);
+
+	x5multiplierTop			= App->physics->CreateChain(0, 0, Hole1, 12);
+	x5multiplierTop->body->SetType(b2_staticBody);
+
+	x5multiplierTopRight	= App->physics->CreateChain(0, 0, Hole2, 10);
+	x5multiplierTopRight->body->SetType(b2_staticBody);
+	
+	x10multiplier			= App->physics->CreateChain(0, 0, Hole3, 14);
+	x10multiplier->body->SetType(b2_staticBody);
+
+	x20multiplier			= App->physics->CreateChain(0, 0, Hole4, 12);
+	x20multiplier->body->SetType(b2_staticBody);
+	
+	x20multiplierLight = App->physics->CreateChain(0, 0, Light1, 12);
+	x20multiplierLight->body->SetType(b2_staticBody);
+
+	leftBotLight = App->physics->CreateChain(0, 0, Light2, 10);
+	leftBotLight->body->SetType(b2_staticBody);
+
+	LeftMidLight = App->physics->CreateChain(0, 0, Light3, 10);
+	LeftMidLight->body->SetType(b2_staticBody);
+
+	LeftTopLight = App->physics->CreateChain(0, 0, Light4, 8);
+	LeftTopLight->body->SetType(b2_staticBody);
+
+	midTopLight = App->physics->CreateChain(0, 0, Light5, 12);
+	midTopLight->body->SetType(b2_staticBody);
+
+	midMidLight = App->physics->CreateChain(0, 0, Light6, 12);
+	midMidLight->body->SetType(b2_staticBody);
+
+	midBotLight = App->physics->CreateChain(0, 0, Light7, 12);
+	midBotLight->body->SetType(b2_staticBody);
+
+	rightTopLight = App->physics->CreateChain(0, 0, Light8, 10);
+	rightTopLight->body->SetType(b2_staticBody);
+
+	rightMidLight = App->physics->CreateChain(0, 0, Light9, 12);
+	rightMidLight->body->SetType(b2_staticBody);
+
+	rightBotLight = App->physics->CreateChain(0, 0, Light10, 12);
+	rightBotLight->body->SetType(b2_staticBody);
 
 
 
@@ -301,7 +329,7 @@ bool ModuleSceneIntro::LoadMap() {
 	sensor_x5right = App->physics->CreateRectangleSensor(400, 65, 5, 5);
 	sensor_x10 = App->physics->CreateRectangleSensor(415, 256, 5, 5);
 	sensor_x20 = App->physics->CreateRectangleSensor(25, 720, 5, 5);
-	//ARROWS
+		//ARROWS
 	sensor_arrows_upright = App->physics->CreateRectangleSensor(15, 75, 5, 5);
 	sensor_arrows_uprleft = App->physics->CreateRectangleSensor(150, 70, 5, 5);
 	sensor_arrows_left = App->physics->CreateRectangleSensor(15, 245, 5, 5);
