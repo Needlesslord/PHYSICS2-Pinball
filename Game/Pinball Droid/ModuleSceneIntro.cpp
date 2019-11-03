@@ -67,8 +67,11 @@ update_status ModuleSceneIntro::PreUpdate() {
 		if ((App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT))
 		{
 			intensity++;
-			if (intensity < 100) ball->body->ApplyLinearImpulse({ 0, -0.8f }, { 0,0 }, true/*, false*/);
-			else int i = 0;
+			if (intensity > 200) intensity = 200;
+		}
+		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP || App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP) {
+			ball->body->ApplyLinearImpulse({ 0, (-0.05f * intensity) }, { 0,0 }, true);
+			intensity = 0;
 		}
 	}
 
@@ -140,11 +143,13 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB) {
 	if (bodyA == ball) {
 		if (bodyB == death) {
 			numLives--;
-			/*//DOESN'T WORK FOR SOME REASON
+			//DOESN'T WORK FOR SOME REASON
 			ball->body->GetWorld()->DestroyBody(ball->body);
 			ball = App->physics->CreateCircle(initialPosition.x, initialPosition.y, 15);
 			ball->listener = this;
-			*/
+		}
+		if (bodyB == standby_sensor) {
+			standby = false;
 		}
 	 }
 
@@ -251,6 +256,12 @@ bool ModuleSceneIntro::LoadMap() {
 	rightFlipper_revolute.upperAngle = 30 * DEGTORAD;
 	rightFlipper_joint = (b2RevoluteJoint*)App->physics->world->CreateJoint(&rightFlipper_revolute);
 
+
+	//SENSORS
+		//DEATH
 	death = App->physics->CreateRectangleSensor(0, 790, SCREEN_WIDTH * 2, 1);
+		//STANDBY
+	standby_sensor =
+		App->physics->CreateRectangleSensor(390, 20, 1, 25);
 	return true;
 }
