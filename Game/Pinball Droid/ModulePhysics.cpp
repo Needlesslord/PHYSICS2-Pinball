@@ -38,7 +38,7 @@ bool ModulePhysics::Start()
 	// big static circle as "ground" in the middle of the screen
 	b2BodyDef body;
 	body.type = b2_staticBody;
-	body.position.Set(PIXEL_TO_METERS(0), PIXEL_TO_METERS(770));
+	body.position.Set(PIXEL_TO_METERS(0), PIXEL_TO_METERS(850));
 	b2Body* floor = world->CreateBody(&body);
 	b2PolygonShape line;
 	line.SetAsBox(PIXEL_TO_METERS(SCREEN_WIDTH), PIXEL_TO_METERS(1));

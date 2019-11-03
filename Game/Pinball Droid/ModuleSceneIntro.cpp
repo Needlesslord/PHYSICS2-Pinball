@@ -68,6 +68,9 @@ update_status ModuleSceneIntro::PreUpdate() {
 	if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT) {
 		leftFlipper->body->ApplyAngularImpulse(-2.0F, true);
 	}
+	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_M) == KEY_REPEAT) {
+		rightFlipper->body->ApplyAngularImpulse(2.0F, true);
+	}
 	
 	//fx
 	if (App->input->GetKey(SDL_SCANCODE_M) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_Z) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN || App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
@@ -105,7 +108,11 @@ update_status ModuleSceneIntro::Update()
 		leftFlipper->GetPosition(x, y);
 		App->renderer->Blit(leftFlipper_tex, x, y - 10, NULL, 1.0f, leftFlipper->GetRotation());
 	}
-
+	if (rightFlipper != NULL) {
+		int x, y;
+		rightFlipper->GetPosition(x, y);
+		App->renderer->Blit(rightFlipper_tex, x, y - 10, NULL, 1.0f, rightFlipper->GetRotation());
+	}
 
 
 	return UPDATE_CONTINUE;
@@ -208,7 +215,8 @@ bool ModuleSceneIntro::LoadMap() {
 
 	//FLIPPERS
 	//LEFT
-	leftFlipper = App->physics->CreateRectangle(190, 723, 85, 20);
+	leftFlipper = App->physics->CreateRectangle(182, 727, 80, 20);
+	rightFlipper = App->physics->CreateRectangle(296, 727, 80, 20);
 
 
 	//JOINTS-------------------------------------------------------------
@@ -216,7 +224,7 @@ bool ModuleSceneIntro::LoadMap() {
 			//LEFT
 	b2RevoluteJointDef leftFlipper_revolute;
 	PhysBody* circleLeft;
-	circleLeft = App->physics->CreateCircle(161, 724, 10);
+	circleLeft = App->physics->CreateCircle(153, 727, 10);
 	circleLeft->body->SetType(b2_staticBody);
 	leftFlipper_revolute.Initialize(leftFlipper->body, circleLeft->body, circleLeft->body->GetWorldCenter());
 	leftFlipper_revolute.collideConnected = false;
@@ -224,11 +232,18 @@ bool ModuleSceneIntro::LoadMap() {
 	leftFlipper_revolute.lowerAngle = -30 * DEGTORAD;
 	leftFlipper_revolute.upperAngle = 30 * DEGTORAD;
 	leftFlipper_joint = (b2RevoluteJoint*)App->physics->world->CreateJoint(&leftFlipper_revolute);
-	//RIGHT
+			//RIGHT
 	b2RevoluteJointDef rightFlipper_revolute;
 	PhysBody* circleRight;
+	circleRight = App->physics->CreateCircle(325, 727, 10);
+	circleRight->body->SetType(b2_staticBody);
+	rightFlipper_revolute.Initialize(rightFlipper->body, circleRight->body, circleRight->body->GetWorldCenter());
+	rightFlipper_revolute.collideConnected = false;
+	rightFlipper_revolute.enableLimit = true;
+	rightFlipper_revolute.lowerAngle = -30 * DEGTORAD;
+	rightFlipper_revolute.upperAngle = 30 * DEGTORAD;
+	rightFlipper_joint = (b2RevoluteJoint*)App->physics->world->CreateJoint(&rightFlipper_revolute);
 
-
-	death = App->physics->CreateRectangleSensor(0, 700, SCREEN_WIDTH * 2, 1);
+	death = App->physics->CreateRectangleSensor(0, 790, SCREEN_WIDTH * 2, 1);
 	return true;
 }
