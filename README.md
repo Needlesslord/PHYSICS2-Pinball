@@ -24,28 +24,25 @@ It has been done only for educational purposes
 ## Team members
 
 
-	_Photo under construction_
-
-
 **Lead Programmer:** Tomás Carreras Ugarte
 
 	GitHub: tomascarreras1000
 
-	Tomás has been in charge of ...
+	Tomás has been in charge of flippers, kicker, chains, background, Base Code
 
 
 **Programmer and Management:** Núria Lamonja
 
 	GitHub:	 needlesslord
 
-	Núria has been in charge of ...
+	Núria has been in charge of flippers, kicker, chains, UI and Fonts, p2Animation, Base Code, README.md
 
 
 **Programmer:** Dani Ruiz
 
 	GitHub:	 xsiro
 
-	Dani has been in charge of ...
+	Dani has been in charge of UI and Fonts, animations
 
 
 
@@ -65,21 +62,6 @@ Development:
 	Núria Lamonja
 
 	Dani Ruiz
-
-
-
-
-***
-
-
-
-
-## Gameplay
-
-A sneak peak to our game featuring main debug functionality.
-
-_under construction_
-
 
 
 
@@ -123,16 +105,18 @@ CONTROLS:
 
 	COMPUTER KEYBOARD ONLY
 
-	[ARROWS] 		Right and left flippers respectively
+	[RIGHT ARROW]/[M]	Right flipper
+	[LEFT ARROW]/[Z] 	Left and Left-Up flippers
 	[DOWN ARROW]/[SPACE]	Kicker
+	[H]			Pause menu						***TO IMPLEMENT YET***
+	[S]			Activate/Deactivate sound (inside Pause Menu)		***TO IMPLEMENT YET***
 	
-	+ - to control the volume
-
 
 
 DEBUG:
 
-	F1 Draws all the shapes and allows mouse joint
+	F1 	Draws all the shapes and allows mouse joint
+	1	Destroys the ball and creates a new one on the MOUSE
 
 
 
