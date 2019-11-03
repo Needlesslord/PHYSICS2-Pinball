@@ -24,6 +24,8 @@ bool ModuleSceneIntro::Start()
 	initialPosition.x = 454;
 	initialPosition.y = 421;
 
+	multiplier = 1;
+
 	App->renderer->camera.x = App->renderer->camera.y = 0;
 
 	background_tex = App->textures->Load("pinball/Background.png");//TODO 100: LOAD ALL PNGs
@@ -37,6 +39,7 @@ bool ModuleSceneIntro::Start()
 	leftlight_tex = App->textures->Load("pinball/L_Light.png");
 	midlight_tex = App->textures->Load("pinball/u_Light.png");
 	rightlight_tex = App->textures->Load("pinball/R_light.png");
+	bouncer_tex = App->textures->Load("pinball/Bouncer_Hit.png");
 	
 	numLives_tex0 = App->textures->Load("pinball/Numbers0.png");
 	numLives_tex1 = App->textures->Load("pinball/Numbers1.png");
@@ -48,6 +51,8 @@ bool ModuleSceneIntro::Start()
 	flipper_fx = App->audio->LoadFx("pinball/Flipper.wav");
 	App->audio->LoadFx("pinball/New_ball.wav");
 	light_fx = App->audio->LoadFx("pinball/Light.wav");
+	bouncer_fx = App->audio->LoadFx("pinball/Bouncers.wav");
+	triangle_fx = App->audio->LoadFx("pinball/Assets/Triangle.wav");
 	//Activate combos
 	
 
@@ -70,6 +75,13 @@ bool ModuleSceneIntro::CleanUp()
 	App->textures->Unload(numLives_tex2);
 	App->textures->Unload(numLives_tex3);
 	App->textures->Unload(bouncerHit);
+	App->textures->Unload(rightUpArrows_tex);
+	App->textures->Unload(leftUpArrows_tex);
+	App->textures->Unload(leftArrows_tex);
+	App->textures->Unload(midlight_tex);
+	App->textures->Unload(rightlight_tex);
+	App->textures->Unload(leftlight_tex);
+	App->textures->Unload(bouncer_tex);
 
 	return true;
 }
@@ -251,9 +263,18 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB) {
 			sensor_arrows_left_b = true;
 		}
 		if (bodyB == bouncerTriangleLeft) {
-			App->renderer->Blit(App->scene_intro->bouncerHit, 0, 0, NULL, 1.0f);
-			//App->audio->PlayFx(triangle);
-
+			/*App->renderer->Blit(App->scene_intro->bouncerHit, 0, 0, NULL, 1.0f);*/
+			App->audio->PlayFx(bouncer_fx);
+		
+		}
+		if (bodyB == bouncerTopLeft) {
+			App->audio->PlayFx(bouncer_fx);
+		}
+		if (bodyB == bouncerTriangleRight) {
+			App->audio->PlayFx(bouncer_fx);
+		}
+		if (bodyB == bouncerTriangleBot) {
+			App->audio->PlayFx(bouncer_fx);
 		}
 		if (bodyB == LeftTopLight) {
 			left_top_light_b = true;
@@ -300,6 +321,14 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB) {
 			App->ui->score_player += 100 * multiplier;
 			App->audio->PlayFx(light_fx);
 		}
+		if (bodyB == triangleLeftBouncer)
+		{
+			App->audio->PlayFx(triangle_fx);
+		}
+		if (bodyB == triangleRightBouncer)
+		{
+			App->audio->PlayFx(triangle_fx);
+		}
 		if (left_top_light_b == true && left_mid_light_b == true && left_bot_light_b == true) {
 			left_top_light_b = false;
 			left_mid_light_b = false;
@@ -316,11 +345,11 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB) {
 			right_bot_light_b = false;
 		}
 
-		
 
 	}
 
 }
+
 bool ModuleSceneIntro::LoadMap() {
 	//BALL FIRST
 	ball = App->physics->CreateCircle(initialPosition.x, initialPosition.y, 15);
@@ -458,19 +487,22 @@ bool ModuleSceneIntro::LoadMap() {
 
 	//SENSORS
 		//DEATH
-	death = App->physics->CreateRectangleSensor(0, 790, SCREEN_WIDTH * 2, 1);
+	death					= App->physics->CreateRectangleSensor(0, 790, SCREEN_WIDTH * 2, 1);
 		//STANDBY
-	standby_sensor = App->physics->CreateRectangleSensor(390, 20, 1, 25);
+	standby_sensor			= App->physics->CreateRectangleSensor(390,  20, 1, 25);
 		//x5, x10, x20
-	sensor_x5up = App->physics->CreateRectangleSensor(202, 32, 5, 5);
-	sensor_x5right = App->physics->CreateRectangleSensor(400, 65, 5, 5);
-	sensor_x10 = App->physics->CreateRectangleSensor(415, 256, 5, 5);
-	sensor_x20 = App->physics->CreateRectangleSensor(25, 720, 5, 5);
+	sensor_x5up				= App->physics->CreateRectangleSensor(202,  32, 5, 5);
+	sensor_x5right			= App->physics->CreateRectangleSensor(400,  65, 5, 5);
+	sensor_x10				= App->physics->CreateRectangleSensor(415, 256, 5, 5);
+	sensor_x20				= App->physics->CreateRectangleSensor( 25, 720, 5, 5);
 		//ARROWS
-	sensor_arrows_upright = App->physics->CreateRectangleSensor(15, 75, 5, 5);
-	sensor_arrows_upleft = App->physics->CreateRectangleSensor(150, 70, 5, 5);
-	sensor_arrows_left = App->physics->CreateRectangleSensor(15, 245, 5, 5);
-
+	sensor_arrows_upright	= App->physics->CreateRectangleSensor( 15,  75, 5, 5);
+	sensor_arrows_upleft	= App->physics->CreateRectangleSensor(150,  70, 5, 5);
+	sensor_arrows_left		= App->physics->CreateRectangleSensor( 15, 245, 5, 5);
+		//x2 BONUS
+	sensor_x2_left			= App->physics->CreateRectangleSensor(269,  70, 5, 5);
+	sensor_x2_mid			= App->physics->CreateRectangleSensor(309,  70, 5, 5);
+	sensor_x2_right			= App->physics->CreateRectangleSensor(349,  70, 5, 5);
 	return true;
 }
 void ModuleSceneIntro::gameOver() {

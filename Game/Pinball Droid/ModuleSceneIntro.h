@@ -85,6 +85,7 @@ public:
 	SDL_Texture* leftlight_tex;
 	SDL_Texture* midlight_tex;
 	SDL_Texture* rightlight_tex;
+	SDL_Texture* bouncer_tex;
 
 	//BouncerHit
 	SDL_Texture* bouncerHit = nullptr;
@@ -98,6 +99,8 @@ public:
 	uint timepivot4 = 0;
 
 	uint flipper_fx;
+	uint bouncer_fx;
+	uint triangle_fx;
 	p2Point<int> ray;
 	bool ray_on;
 	int life = 0;
@@ -157,10 +160,10 @@ public:
 	bool x5right = false;
 	bool x10 = false;
 	bool x20 = false;
-
-
-
-
+	//sensors bonus
+	PhysBody* sensor_x2_left;
+	PhysBody* sensor_x2_mid;
+	PhysBody* sensor_x2_right;
 
 
 };
