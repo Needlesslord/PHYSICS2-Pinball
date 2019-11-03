@@ -12,8 +12,8 @@ It has been done only for educational purposes
 
 	MAIN DIFFERENCES:
 
-		_under construction_
-
+		Tutorial and Menu Pause not implemented
+		
 
 
 

@@ -53,6 +53,8 @@ bool ModuleSceneIntro::Start()
 	flipper_fx = App->audio->LoadFx("pinball/Flipper.wav");
 	App->audio->LoadFx("pinball/New_ball.wav");
 	light_fx = App->audio->LoadFx("pinball/Light.wav");
+	bouncer_fx = App->audio->LoadFx("pinball/Bouncers.wav");
+	triangle_fx = App->audio->LoadFx("pinball/Assets/Triangle.wav");
 	//Activate combos
 	
 
@@ -75,6 +77,15 @@ bool ModuleSceneIntro::CleanUp()
 	App->textures->Unload(numLives_tex2);
 	App->textures->Unload(numLives_tex3);
 	App->textures->Unload(bouncerHit);
+	App->textures->Unload(rightUpArrows_tex);
+	App->textures->Unload(leftUpArrows_tex);
+	App->textures->Unload(leftArrows_tex);
+	App->textures->Unload(midlight_tex);
+	App->textures->Unload(rightlight_tex);
+	App->textures->Unload(leftlight_tex);
+	App->textures->Unload(sensor_x2_left_tex);
+	App->textures->Unload(sensor_x2_mid_tex);
+	App->textures->Unload(sensor_x2_right_tex);
 
 	return true;
 }
@@ -281,45 +292,71 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB) {
 			sensor_arrows_left_b = true;
 		}
 		if (bodyB == bouncerTriangleLeft) {
-			App->renderer->Blit(App->scene_intro->bouncerHit, 0, 0, NULL, 1.0f);
-			//App->audio->PlayFx(triangle);
-
+			/*App->renderer->Blit(App->scene_intro->bouncerHit, 0, 0, NULL, 1.0f);*/
+			App->audio->PlayFx(bouncer_fx);
+		
+		}
+		if (bodyB == bouncerTopLeft) {
+			App->audio->PlayFx(bouncer_fx);
+		}
+		if (bodyB == bouncerTriangleRight) {
+			App->audio->PlayFx(bouncer_fx);
+		}
+		if (bodyB == bouncerTriangleBot) {
+			App->audio->PlayFx(bouncer_fx);
 		}
 		if (bodyB == LeftTopLight) {
 			left_top_light_b = true;
+			App->ui->score_player += 100 * multiplier;
 			App->audio->PlayFx(light_fx);
 		}
 		if (bodyB == LeftMidLight){
 			left_mid_light_b = true;
+			App->ui->score_player += 100 * multiplier;
 			App->audio->PlayFx(light_fx);
 		}
 		if (bodyB == LeftBotLight) {
 			left_bot_light_b = true;
+			App->ui->score_player += 100 * multiplier;
 			App->audio->PlayFx(light_fx);
 		}
 		if (bodyB == midTopLight) {
 			mid_top_light_b = true;
+			App->ui->score_player += 100 * multiplier;
 			App->audio->PlayFx(light_fx);
 		}
 		if (bodyB == midMidLight) {
 			mid_mid_light_b = true;
+			App->ui->score_player += 100 * multiplier;
 			App->audio->PlayFx(light_fx);
 		}
 		if (bodyB == midBotLight) {
 			mid_bot_light_b = true;
+			App->ui->score_player += 100 * multiplier;
 			App->audio->PlayFx(light_fx);
 		}
 		if (bodyB == rightTopLight) {
 			right_top_light_b = true;
+			App->ui->score_player += 100 * multiplier;
 			App->audio->PlayFx(light_fx);
 		}
 		if (bodyB == rightMidLight) {
 			right_mid_light_b = true;
+			App->ui->score_player += 100 * multiplier;
 			App->audio->PlayFx(light_fx);
 		}
 		if (bodyB == rightTopLight) {
 			right_bot_light_b = true;
+			App->ui->score_player += 100 * multiplier;
 			App->audio->PlayFx(light_fx);
+		}
+		if (bodyB == triangleLeftBouncer)
+		{
+			App->audio->PlayFx(triangle_fx);
+		}
+		if (bodyB == triangleRightBouncer)
+		{
+			App->audio->PlayFx(triangle_fx);
 		}
 		if (left_top_light_b == true && left_mid_light_b == true && left_bot_light_b == true) {
 			left_top_light_b = false;
@@ -370,7 +407,9 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB) {
 			ball->body->SetLinearVelocity(v);
 		}
 	}
+
 }
+
 bool ModuleSceneIntro::LoadMap() {
 	//BALL FIRST
 	ball = App->physics->CreateCircle(initialPosition.x, initialPosition.y, 15);
@@ -528,7 +567,7 @@ bool ModuleSceneIntro::LoadMap() {
 }
 void ModuleSceneIntro::gameOver() {
 
-	//App->ui->Score = 0; //not working
+	App->ui->score_player = 0; 
 	numLives = 3;
 	LeftTopLight = false;
 	LeftMidLight = false;
@@ -540,7 +579,6 @@ void ModuleSceneIntro::gameOver() {
 	rightTopLight = false;
 	rightMidLight = false;
 	rightBotLight = false;
-
 
 
 }

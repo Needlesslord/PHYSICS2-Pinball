@@ -63,6 +63,7 @@ public:
 	PhysBody* leftFlipper;
 	PhysBody* leftupFlipper;
 
+
 	b2RevoluteJoint* leftFlipper_joint;
 	b2RevoluteJoint* leftupFlipper_joint;
 	b2RevoluteJoint* rightFlipper_joint;
@@ -88,6 +89,7 @@ public:
 	SDL_Texture* sensor_x2_mid_tex;
 	SDL_Texture* sensor_x2_right_tex;
 
+
 	//BouncerHit
 	SDL_Texture* bouncerHit = nullptr;
 	bool printp1 = false;
@@ -100,11 +102,13 @@ public:
 	uint timepivot4 = 0;
 
 	uint flipper_fx;
+	uint bouncer_fx;
+	uint triangle_fx;
 	p2Point<int> ray;
 	bool ray_on;
 	int life = 0;
 	bool alive = true;
-	int multiplier;
+	int multiplier = 1;
 
 	//death to initial position
 	bool isDead = false;
@@ -131,7 +135,7 @@ public:
 	//To activate combos
 	uint light_fx;
 	uint enterhole;
-	uint exxithole;
+	uint exithole;
 	SDL_Texture* lightUp;
 	SDL_Texture* lightLeft;
 	SDL_Texture* lightU;
@@ -155,6 +159,14 @@ public:
 	PhysBody* sensor_arrows_upright;
 	PhysBody* sensor_arrows_upleft;
 	PhysBody* sensor_arrows_left;
+	//multipliers
+	bool arrows_upright = false;
+	bool arrows_upleft = false;
+	bool arrows_left = false;
+	bool x5up = false;
+	bool x5right = false;
+	bool x10 = false;
+	bool x20 = false;
 	//sensors bonus
 	PhysBody* sensor_x2_left;
 	PhysBody* sensor_x2_mid;
