@@ -37,7 +37,7 @@ bool ModuleSceneIntro::Start()
 	numLives_tex3 = App->textures->Load("pinball/Numbers3.png");
 
 	flipper_fx = App->audio->LoadFx("pinball/Flipper.wav");
-
+	App->audio->LoadFx("pinball/New_ball.wav");
 	//Activate combos
 	light_fx = App->audio->LoadFx("pinball/Light.wav");
 
