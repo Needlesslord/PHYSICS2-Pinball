@@ -137,7 +137,7 @@ update_status ModuleSceneIntro::Update()
 	}
 	//LIGHTS
 	if ((sensor_arrows_upright != NULL) && (sensor_arrows_upright_b == true)){
-		App->renderer->Blit(rightUpArrows_tex, 50, 10);
+		App->renderer->Blit(rightUpArrows_tex, 96, 19);
 	}
 
 
@@ -174,15 +174,15 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB) {
 		if (bodyB == death) {
 			numLives--;
 			isDead = true;
-			bool sensor_arrows_upright_b = false;
-			bool sensor_arrows_upleft_b = false;
-			bool sensor_arrows_left_b = false;
+			sensor_arrows_upright_b = false;
+			sensor_arrows_upleft_b = false;
+			sensor_arrows_left_b = false;
 		}
 		if (bodyB == standby_sensor) {
 			standby = false;
 		}
 		if (bodyB == sensor_arrows_upright && ball->body->GetLinearVelocity().y > 0) {
-			bool sensor_arrows_upright_b = true;
+			sensor_arrows_upright_b = true;
 		}
 		if (bodyB == bouncerTriangleLeft) {
 
