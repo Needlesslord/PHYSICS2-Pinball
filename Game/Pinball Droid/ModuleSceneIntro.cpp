@@ -254,15 +254,12 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB) {
 		if (bodyB == sensor_arrows_left && ball->body->GetLinearVelocity().y < 0) {
 			sensor_arrows_left_b = true;
 		}
-		//if (bodyB == bouncerTriangleLeft) {
-		//	App->renderer->Blit(App->scene_intro->bouncerHit, 0, 0, NULL, 1.0f);
-		//	//App->audio->PlayFx(bouncer_fx);//
-		//
-		//}
-		if (bodyB == bouncerTopLeft) {
-			App->audio->PlayFx(bouncer_fx);
-		}
 		if (bodyB == bouncerTriangleLeft) {
+			App->renderer->Blit(App->scene_intro->bouncerHit, 0, 0, NULL, 1.0f);
+			App->audio->PlayFx(bouncer_fx);
+		
+		}
+		if (bodyB == bouncerTopLeft) {
 			App->audio->PlayFx(bouncer_fx);
 		}
 		if (bodyB == bouncerTriangleRight) {
