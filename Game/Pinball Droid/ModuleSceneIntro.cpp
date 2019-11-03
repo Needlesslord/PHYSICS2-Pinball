@@ -41,6 +41,8 @@ bool ModuleSceneIntro::Start()
 	numLives_tex2 = App->textures->Load("pinball/Numbers2.png");
 	numLives_tex3 = App->textures->Load("pinball/Numbers3.png");
 
+	bouncerHit = App->textures->Load("pinball/Bouncer Hit.png");
+
 	flipper_fx = App->audio->LoadFx("pinball/Flipper.wav");
 	App->audio->LoadFx("pinball/New_ball.wav");
 	//Activate combos
@@ -64,6 +66,8 @@ bool ModuleSceneIntro::CleanUp()
 	App->textures->Unload(numLives_tex1);
 	App->textures->Unload(numLives_tex2);
 	App->textures->Unload(numLives_tex3);
+	App->textures->Unload(bouncerHit);
+
 	return true;
 }
 
@@ -171,6 +175,27 @@ update_status ModuleSceneIntro::Update()
 		ball->GetPosition(x, y);
 		App->renderer->Blit(ball_tex, x, y, NULL, 1.0f);
 	}
+	//BOUNCERS
+	if (printp1) {
+		App->renderer->Blit(bouncerHit, 255, 141, NULL, 1.0f);
+		timepivot1++;
+	}
+	if (printp2) {
+		App->renderer->Blit(bouncerHit, 330, 141, NULL, 1.0f);
+		timepivot2++;
+	}
+	if (printp3) {
+		App->renderer->Blit(bouncerHit, 52, 71, NULL, 1.0f);
+		timepivot3++;
+	}
+	if (printp4) {
+		App->renderer->Blit(bouncerHit, 284, 210, NULL, 1.0f);
+		timepivot4++;
+	}
+
+
+
+
 	return UPDATE_CONTINUE;
 }
 
@@ -186,8 +211,7 @@ update_status ModuleSceneIntro::PostUpdate() {
 }
 
 void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB) {
-
-
+	
 	if (bodyA == ball) {
 		if (bodyB == death) {
 			numLives--;
@@ -210,6 +234,8 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB) {
 			sensor_arrows_left_b = true;
 		}
 		if (bodyB == bouncerTriangleLeft) {
+			App->renderer->Blit(App->scene_intro->bouncerHit, 0, 0, NULL, 1.0f);
+			//App->audio->PlayFx(triangle);
 
 		}
 		if (bodyB == LeftTopLight) {

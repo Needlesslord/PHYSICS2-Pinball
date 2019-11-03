@@ -83,6 +83,17 @@ public:
 	SDL_Texture* numLives_tex3;
 	SDL_Texture* leftlight_tex;
 
+	//BouncerHit
+	SDL_Texture* bouncerHit = nullptr;
+	bool printp1 = false;
+	bool printp2 = false;
+	bool printp3 = false;
+	bool printp4 = false;
+	uint timepivot1 = 0;
+	uint timepivot2 = 0;
+	uint timepivot3 = 0;
+	uint timepivot4 = 0;
+
 	uint flipper_fx;
 	p2Point<int> ray;
 	bool ray_on;
