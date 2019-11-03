@@ -28,21 +28,21 @@ It has been done only for educational purposes
 
 	GitHub: tomascarreras1000
 
-	Tomás has been in charge of flippers, kicker, chains, background, Base Code, ball, sensors
+	Tomás has been in charge of flippers, kicker, chains, background, Base Code, ball, sensors, UI and Fonts, onCollision, FX, Score
 
 
 **Programmer and Management:** Núria Lamonja
 
 	GitHub:	 needlesslord
 
-	Núria has been in charge of flippers, kicker, chains, UI and Fonts, p2Animation, Base Code, README.md, sensors and combos
+	Núria has been in charge of flippers, kicker, chains, UI and Fonts, p2Animation, Base Code, README.md, sensors and combos, lights and arrows activation/deactivation, onCollision, FX
 
 
 **Programmer:** Dani Ruiz
 
 	GitHub:	 xsiro
 
-	Dani has been in charge of UI and Fonts, animations
+	Dani has been in charge of  sprites and coordinates, FX, lights and arrows activation/deactivation
 
 
 
