@@ -74,6 +74,9 @@ public:
 	SDL_Texture* leftFlipper_tex;
 	SDL_Texture* leftupFlipper_tex;
 	SDL_Texture* rightFlipper_tex;
+	SDL_Texture* rightUpArrows_tex;
+	SDL_Texture* leftUpArrows_tex;
+	SDL_Texture* leftArrows_tex;
 	SDL_Texture* numLives_tex0;
 	SDL_Texture* numLives_tex1;
 	SDL_Texture* numLives_tex2;
@@ -87,7 +90,9 @@ public:
 
 	//death to initial position
 	bool isDead = false;
-
+	bool sensor_arrows_upright_b = false;
+	bool sensor_arrows_upleft_b = false;
+	bool sensor_arrows_left_b = false;
 	//PLUNGER
 	bool standby = true;
 	int intensity = 0;
