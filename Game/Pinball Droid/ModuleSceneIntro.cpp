@@ -193,9 +193,6 @@ update_status ModuleSceneIntro::Update()
 		timepivot4++;
 	}
 
-
-
-
 	return UPDATE_CONTINUE;
 }
 
@@ -211,7 +208,6 @@ update_status ModuleSceneIntro::PostUpdate() {
 }
 
 void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB) {
-	
 	if (bodyA == ball) {
 		if (bodyB == death) {
 			numLives--;
