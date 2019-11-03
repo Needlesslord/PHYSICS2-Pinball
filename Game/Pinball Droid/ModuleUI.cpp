@@ -1,6 +1,71 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleUI.h"
+#include "ModuleFonts.h"
+#include "ModuleTextures.h"
+#include "ModuleSceneIntro.h"
+#include "ModulePlayer.h"
+
+
+
+ModuleUI::ModuleUI(Application* app, bool start_enabled) : Module(app, start_enabled)
+{
+}
+
+ModuleUI::~ModuleUI()
+{}
+
+// Load assets
+bool ModuleUI::Start()
+{
+	LOG("Loading UI");
+	font = App->fonts->Load("pinball/fonts.png", "0123456789", 1);
+	Aux[0] = 0;
+	return true;
+}
+
+// Unload assets
+bool ModuleUI::CleanUp()
+{
+	LOG("Unloading Ui");
+
+	return true;
+}
+
+// Update: draw background
+update_status ModuleUI::Update()
+{
+
+	sprintf_s(score, 7, "%1d", Score);
+	sprintf_s(highscore, 7, "%1d", HighScore);
+	sprintf_s(lastscore, 7, "%1d", LastScore);
+
+
+
+
+	if (App->scene_intro->numLives < 0)
+	{
+		Aux[cont + 1] = Score;
+		if (Score > HighScore)
+		{
+			HighScore = Score;
+		}
+		LastScore = Aux[cont];
+		cont++;
+		//Score[cont] = 0;
+	}
+
+	return UPDATE_CONTINUE;
+}
+
+
+
+
+#if 0;
+
+#include "Globals.h"
+#include "Application.h"
+#include "ModuleUI.h"
 #include "ModuleTextures.h"
 #include "ModuleSceneIntro.h"
 #include "ModuleRender.h"
@@ -20,7 +85,6 @@ bool ModuleUI::Start()
 	score_font = App->fonts->Load("pinball/score_font.png" ,"0123456789", 1);
 	life_font = App->fonts->Load("pinball/life_font.png", "01234", 1);
 
-	game_over = App->textures->Load("pinball/game_over.png");
 	return true;
 }
 
@@ -92,4 +156,4 @@ update_status ModuleUI::PostUpdate()
 }
 
 
-
+#endif;
