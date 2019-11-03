@@ -32,6 +32,8 @@ bool ModuleSceneIntro::Start()
 	rightFlipper_tex = App->textures->Load("pinball/rightFlipper.png");
 	rightUpArrows_tex = App->textures->Load("pinball/left.png");
 	leftUpArrows_tex = App->textures->Load("pinball/right.png");
+	leftArrows_tex = App->textures->Load("pinball/Up.png");
+	leftlight_tex = App->textures->Load("pinball/L_Light.png");
 	
 	numLives_tex0 = App->textures->Load("pinball/Numbers0.png");
 	numLives_tex1 = App->textures->Load("pinball/Numbers1.png");
@@ -111,12 +113,7 @@ update_status ModuleSceneIntro::Update()
 
 
 	// All draw functions --------------------------------------------------------------------
-			//BALL
-	if (ball != NULL) {
-		int x, y;
-		ball->GetPosition(x, y);
-		App->renderer->Blit(ball_tex, x, y, NULL, 1.0f);
-	}
+
 	//FLIPPERS
 		//LEFT
 	if (leftFlipper != NULL) {
@@ -124,26 +121,37 @@ update_status ModuleSceneIntro::Update()
 		leftFlipper->GetPosition(x, y);
 		App->renderer->Blit(leftFlipper_tex, x, y - 10, NULL, 1.0f, leftFlipper->GetRotation());
 	}
-		//LEFT-UP
+	//LEFT-UP
 	if (leftupFlipper != NULL) {
 		int x, y;
 		leftupFlipper->GetPosition(x, y);
 		App->renderer->Blit(leftupFlipper_tex, x, y - 10, NULL, 1.0f, leftFlipper->GetRotation());
 	}
-		//RIGHT
+	//RIGHT
 	if (rightFlipper != NULL) {
 		int x, y;
 		rightFlipper->GetPosition(x, y);
 		App->renderer->Blit(rightFlipper_tex, x, y - 10, NULL, 1.0f, rightFlipper->GetRotation());
 	}
 	//LIGHTS
-	if ((sensor_arrows_upright != NULL) && (sensor_arrows_upright_b == true)){
+	if ((sensor_arrows_upright != NULL) && (sensor_arrows_upright_b == true)) {
 		App->renderer->Blit(rightUpArrows_tex, 96, 19);
 	}
 	if ((sensor_arrows_upleft != NULL) && (sensor_arrows_upleft_b == true)) {
 		App->renderer->Blit(leftUpArrows_tex, 5, 19);
 	}
-
+	if ((sensor_arrows_left != NULL) && (sensor_arrows_left_b == true)) {
+		App->renderer->Blit(leftArrows_tex, 9, 233);
+	}
+	if ((LeftTopLight != NULL) && (left_top_light_b == true)) {
+		App->renderer->Blit(leftlight_tex, 90, 307);
+	}
+	if ((LeftMidLight != NULL) && (left_mid_light_b == true)) {
+		App->renderer->Blit(leftlight_tex, 80, 325);
+	}
+	if ((LeftBotLight != NULL) && (left_bot_light_b == true)) {
+		App->renderer->Blit(leftlight_tex, 70, 343);
+	}
 	if (isDead)
 	{
 		ball->body->GetWorld()->DestroyBody(ball->body);
@@ -153,6 +161,12 @@ update_status ModuleSceneIntro::Update()
 		if (numLives < 0)	gameOver();
 	}
 
+	//BALL
+	if (ball != NULL) {
+		int x, y;
+		ball->GetPosition(x, y);
+		App->renderer->Blit(ball_tex, x, y, NULL, 1.0f);
+	}
 	return UPDATE_CONTINUE;
 }
 
@@ -176,6 +190,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB) {
 			sensor_arrows_upright_b = false;
 			sensor_arrows_upleft_b = false;
 			sensor_arrows_left_b = false;
+			
 		}
 		if (bodyB == standby_sensor) {
 			standby = false;
@@ -186,9 +201,20 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB) {
 		if (bodyB == sensor_arrows_upleft && ball->body->GetLinearVelocity().y > 0) {
 			sensor_arrows_upleft_b = true;
 		}
-		
+		if (bodyB == sensor_arrows_left && ball->body->GetLinearVelocity().y < 0) {
+			sensor_arrows_left_b = true;
+		}
 		if (bodyB == bouncerTriangleLeft) {
 
+		}
+		if (bodyB == LeftTopLight) {
+			left_top_light_b = true;
+		}
+		if (bodyB == LeftMidLight){
+			left_mid_light_b = true;
+		}
+		if (bodyB == LeftBotLight) {
+			left_bot_light_b = true;
 		}
 	}
 }
@@ -263,8 +289,8 @@ bool ModuleSceneIntro::LoadMap() {
 	x20multiplierLight = App->physics->CreateChain(0, 0, Light1, 12);
 	x20multiplierLight->body->SetType(b2_staticBody);
 
-	leftBotLight = App->physics->CreateChain(0, 0, Light2, 10);
-	leftBotLight->body->SetType(b2_staticBody);
+	LeftBotLight = App->physics->CreateChain(0, 0, Light2, 10);
+	LeftBotLight->body->SetType(b2_staticBody);
 
 	LeftMidLight = App->physics->CreateChain(0, 0, Light3, 10);
 	LeftMidLight->body->SetType(b2_staticBody);
@@ -357,4 +383,7 @@ bool ModuleSceneIntro::LoadMap() {
 }
 void ModuleSceneIntro::gameOver() {
 	numLives = 3;
+	LeftTopLight = false;
+	LeftMidLight = false;
+	LeftBotLight = false;
 }

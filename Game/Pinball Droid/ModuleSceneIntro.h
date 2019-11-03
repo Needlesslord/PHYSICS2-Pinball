@@ -48,7 +48,7 @@ public:
 	PhysBody* x10multiplier;
 	PhysBody* x20multiplier;
 	PhysBody* x20multiplierLight;
-	PhysBody* leftBotLight;
+	PhysBody* LeftBotLight;
 	PhysBody* LeftMidLight;
 	PhysBody* LeftTopLight;
 	PhysBody* midTopLight;
@@ -81,6 +81,7 @@ public:
 	SDL_Texture* numLives_tex1;
 	SDL_Texture* numLives_tex2;
 	SDL_Texture* numLives_tex3;
+	SDL_Texture* leftlight_tex;
 
 	uint flipper_fx;
 	p2Point<int> ray;
@@ -93,6 +94,10 @@ public:
 	bool sensor_arrows_upright_b = false;
 	bool sensor_arrows_upleft_b = false;
 	bool sensor_arrows_left_b = false;
+	bool left_top_light_b = false;
+	bool left_mid_light_b = false;
+	bool left_bot_light_b = false;
+	
 	//PLUNGER
 	bool standby = true;
 	int intensity = 0;
