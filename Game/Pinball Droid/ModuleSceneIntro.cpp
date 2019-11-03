@@ -135,14 +135,20 @@ update_status ModuleSceneIntro::Update()
 		App->renderer->Blit(rightFlipper_tex, x, y - 10, NULL, 1.0f, rightFlipper->GetRotation());
 	}
 	
+
+
+
 	if (isDead)
 	{
-		int x = initialPosition.x;
-		int y = initialPosition.y;
-		ball->body->GetWorld()->DestroyBody(ball->body);
-		ball = App->physics->CreateCircle(x, y, 15);
-		ball->listener = this;
-		isDead = false;
+		if (numLives > 0) {
+			int x = initialPosition.x;
+			int y = initialPosition.y;
+			ball->body->GetWorld()->DestroyBody(ball->body);
+			ball = App->physics->CreateCircle(x, y, 15);
+			ball->listener = this;
+			isDead = false;
+		}
+		else gameOver();
 	}
 
 	return UPDATE_CONTINUE;
@@ -168,10 +174,10 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB) {
 		if (bodyB == standby_sensor) {
 			standby = false;
 		}
+		if (bodyB == bouncerTriangleLeft) {
 
-
+		}
 	 }
-
 }
 bool ModuleSceneIntro::LoadMap() {
 	//BALL FIRST
@@ -179,7 +185,7 @@ bool ModuleSceneIntro::LoadMap() {
 	ball->body->SetBullet(true);
 	ball->body->GetFixtureList()->SetFriction(0.5f);
 	ball->listener = this;
-	numLives = 3;
+	numLives = 2;
 
 	//BACKGROUND
 	background				= App->physics->CreateChain(0, 0, Background, 180);
@@ -205,6 +211,8 @@ bool ModuleSceneIntro::LoadMap() {
 
 	bouncerTriangleLeft		= App->physics->CreateChain(0, 0, PivoteUR, 42);//BOUNCER TOP - MID
 	bouncerTriangleLeft->body->SetType(b2_staticBody);
+	bouncerTriangleLeft->body->GetFixtureList()->SetRestitution(1.2F);
+	bouncerTriangleLeft->body->GetFixtureList()->SetFriction(0.5F);
 
 	bouncerTriangleRight	= App->physics->CreateChain(0, 0, PivoteUL, 40);//BOUNCER TOP-RIGHT
 	bouncerTriangleRight->body->SetType(b2_staticBody);
@@ -333,4 +341,7 @@ bool ModuleSceneIntro::LoadMap() {
 	sensor_arrows_left = App->physics->CreateRectangleSensor(15, 245, 5, 5);
 
 	return true;
+}
+void ModuleSceneIntro::gameOver() {
+
 }

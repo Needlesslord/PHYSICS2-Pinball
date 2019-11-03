@@ -20,6 +20,7 @@ public:
 	bool CleanUp();
 	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
 	int numLives;
+	void gameOver();
 
 private:
 	bool LoadMap();
