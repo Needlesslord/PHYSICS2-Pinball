@@ -60,6 +60,7 @@ public:
 
 
 	PhysBody* death;
+	PhysBody* standby_sensor;
 	PhysBody* rightFlipper;
 	PhysBody* leftFlipper;
 	PhysBody* leftupFlipper;
@@ -85,8 +86,10 @@ public:
 	bool ray_on;
 	int life = 0;
 	bool alive = true;
+
+	//PLUNGER
 	bool standby = true;
-	uint intensity = 0;
+	int intensity = 0;
 
 	//To activate combos
 	uint light_fx;
