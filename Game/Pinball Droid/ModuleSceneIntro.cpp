@@ -112,7 +112,7 @@ update_status ModuleSceneIntro::Update()
 	else if (numLives == 1) App->renderer->Blit(numLives_tex1, 457, 708, NULL, 1.0f);
 	else {
 		App->renderer->Blit(numLives_tex0, 457, 708, NULL, 1.0f);
-		App->ui->Score = 0;
+		//App->ui->Score = 0; //not working
 	}
 	
 	// All draw functions --------------------------------------------------------------------
@@ -223,6 +223,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB) {
 		}
 	}
 
+	//not working
 	//if (App->ui->Score >= 10 && App->ui->Score < 100) {
 	//	App->fonts->BlitText(205, 773, App->ui->font, App->ui->score);
 	//}
@@ -392,7 +393,7 @@ bool ModuleSceneIntro::LoadMap() {
 }
 void ModuleSceneIntro::gameOver() {
 
-	App->ui->Score = 0;
+	//App->ui->Score = 0; //not working
 	numLives = 3;
 	LeftTopLight = false;
 	LeftMidLight = false;
