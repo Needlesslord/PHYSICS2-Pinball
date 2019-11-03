@@ -30,6 +30,7 @@ bool ModuleSceneIntro::Start()
 	leftFlipper_tex = App->textures->Load("pinball/leftFlipper.png");
 	leftupFlipper_tex = App->textures->Load("pinball/leftFlipper.png");
 	rightFlipper_tex = App->textures->Load("pinball/rightFlipper.png");
+	rightUpArrows_tex = App->textures->Load("pinball/left.png");
 	
 	numLives_tex0 = App->textures->Load("pinball/Numbers0.png");
 	numLives_tex1 = App->textures->Load("pinball/Numbers1.png");
@@ -97,26 +98,26 @@ update_status ModuleSceneIntro::PreUpdate() {
 // Update: draw background
 update_status ModuleSceneIntro::Update()
 {
-//STATIC THINGS:--------------------------------------------------------------------------
-	//BACKGROUND
+	//STATIC THINGS:--------------------------------------------------------------------------
+		//BACKGROUND
 	App->renderer->Blit(background_tex, 0, 0, NULL, 1.0f);
-	
+
 	//NUMBER OF LIVES
-	if		(numLives == 3)	App->renderer->Blit(numLives_tex3, 457, 708, NULL, 1.0f);
+	if (numLives == 3)	App->renderer->Blit(numLives_tex3, 457, 708, NULL, 1.0f);
 	else if (numLives == 2) App->renderer->Blit(numLives_tex2, 457, 708, NULL, 1.0f);
 	else if (numLives == 1) App->renderer->Blit(numLives_tex1, 457, 708, NULL, 1.0f);
 	else					App->renderer->Blit(numLives_tex0, 457, 708, NULL, 1.0f);
 
 
-// All draw functions --------------------------------------------------------------------
-		//BALL
+	// All draw functions --------------------------------------------------------------------
+			//BALL
 	if (ball != NULL) {
 		int x, y;
 		ball->GetPosition(x, y);
 		App->renderer->Blit(ball_tex, x, y, NULL, 1.0f);
 	}
-		//FLIPPERS
-	//LEFT
+	//FLIPPERS
+//LEFT
 	if (leftFlipper != NULL) {
 		int x, y;
 		leftFlipper->GetPosition(x, y);
@@ -134,7 +135,12 @@ update_status ModuleSceneIntro::Update()
 		rightFlipper->GetPosition(x, y);
 		App->renderer->Blit(rightFlipper_tex, x, y - 10, NULL, 1.0f, rightFlipper->GetRotation());
 	}
-	
+	//LIGHTS
+	if ((sensor_arrows_upright != NULL) && (sensor_arrows_upright_b == true)){
+		App->renderer->Blit(rightUpArrows_tex, 50, 10);
+	}
+
+
 	if (isDead)
 	{
 		int x = initialPosition.x;
@@ -160,17 +166,27 @@ update_status ModuleSceneIntro::PostUpdate() {
 }
 
 void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB) {
+	
 	if (bodyA == ball) {
 		if (bodyB == death) {
 			numLives--;
 			isDead = true;
+			bool sensor_arrows_upright_b = false;
+			bool sensor_arrows_upleft_b = false;
+			bool sensor_arrows_left_b = false;
 		}
 		if (bodyB == standby_sensor) {
 			standby = false;
 		}
+		if (bodyB == sensor_arrows_upright && ball->body->GetLinearVelocity().y > 0) {
+			bool sensor_arrows_upright_b = true;
+		}
+		
 
+		
 
 	 }
+	
 
 }
 bool ModuleSceneIntro::LoadMap() {
