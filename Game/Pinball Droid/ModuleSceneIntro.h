@@ -29,6 +29,35 @@ public:
 	PhysBody* ball;
 	PhysBody* background;
 	PhysBody* backgroundL;
+	PhysBody* backgroundR;
+	PhysBody* chainL;
+	PhysBody* chainR;
+	PhysBody* backgroundU;
+	PhysBody* backgroundLine;
+	PhysBody* pivoteUR;
+	PhysBody* pivoteUL;
+	PhysBody* pivoteU;
+	PhysBody* pivoteL;
+	PhysBody* bouncyL;
+	PhysBody* bouncyR;
+	PhysBody* barraL;
+	PhysBody* barraR;
+	PhysBody* hole1;
+	PhysBody* hole2;
+	PhysBody* hole3;
+	PhysBody* hole4;
+	PhysBody* light1;
+	PhysBody* light2;
+	PhysBody* light3;
+	PhysBody* light4;
+	PhysBody* light5;
+	PhysBody* light6;
+	PhysBody* light7;
+	PhysBody* light8;
+	PhysBody* light9;
+	PhysBody* light10;
+		
+
 
 	PhysBody* death;
 	PhysBody* rightFlipper;
