@@ -34,6 +34,8 @@ bool ModuleSceneIntro::Start()
 	leftUpArrows_tex = App->textures->Load("pinball/right.png");
 	leftArrows_tex = App->textures->Load("pinball/Up.png");
 	leftlight_tex = App->textures->Load("pinball/L_Light.png");
+	midlight_tex = App->textures->Load("pinball/u_Light.png");
+	rightlight_tex = App->textures->Load("pinball/R_light.png");
 	
 	numLives_tex0 = App->textures->Load("pinball/Numbers0.png");
 	numLives_tex1 = App->textures->Load("pinball/Numbers1.png");
@@ -42,8 +44,9 @@ bool ModuleSceneIntro::Start()
 
 	flipper_fx = App->audio->LoadFx("pinball/Flipper.wav");
 	App->audio->LoadFx("pinball/New_ball.wav");
-	//Activate combos
 	light_fx = App->audio->LoadFx("pinball/Light.wav");
+	//Activate combos
+	
 
 	LoadMap();
 
@@ -152,6 +155,24 @@ update_status ModuleSceneIntro::Update()
 	if ((LeftBotLight != NULL) && (left_bot_light_b == true)) {
 		App->renderer->Blit(leftlight_tex, 70, 343);
 	}
+	if ((midTopLight != NULL) && (mid_top_light_b == true)) {
+		App->renderer->Blit(midlight_tex, 265, 224);
+	}
+	if ((midMidLight != NULL) && (mid_mid_light_b == true)) {
+		App->renderer->Blit(midlight_tex, 281, 238);
+	}
+	if ((midBotLight != NULL) && (mid_bot_light_b == true)) {
+		App->renderer->Blit(midlight_tex, 297, 254);
+	}
+	if ((rightTopLight != NULL) && (right_top_light_b == true)) {
+		App->renderer->Blit(rightlight_tex, 394, 396);
+	}
+	if ((rightMidLight != NULL) && (right_mid_light_b == true)) {
+		App->renderer->Blit(rightlight_tex, 405, 414);
+	}
+	if ((rightBotLight != NULL) && (right_bot_light_b == true)) {
+		App->renderer->Blit(rightlight_tex, 415, 431);
+	}
 	if (isDead)
 	{
 		ball->body->GetWorld()->DestroyBody(ball->body);
@@ -209,13 +230,56 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB) {
 		}
 		if (bodyB == LeftTopLight) {
 			left_top_light_b = true;
+			App->audio->PlayFx(light_fx);
 		}
 		if (bodyB == LeftMidLight){
 			left_mid_light_b = true;
+			App->audio->PlayFx(light_fx);
 		}
 		if (bodyB == LeftBotLight) {
 			left_bot_light_b = true;
+			App->audio->PlayFx(light_fx);
 		}
+		if (bodyB == midTopLight) {
+			mid_top_light_b = true;
+			App->audio->PlayFx(light_fx);
+		}
+		if (bodyB == midMidLight) {
+			mid_mid_light_b = true;
+			App->audio->PlayFx(light_fx);
+		}
+		if (bodyB == midBotLight) {
+			mid_bot_light_b = true;
+			App->audio->PlayFx(light_fx);
+		}
+		if (bodyB == rightTopLight) {
+			right_top_light_b = true;
+			App->audio->PlayFx(light_fx);
+		}
+		if (bodyB == rightMidLight) {
+			right_mid_light_b = true;
+			App->audio->PlayFx(light_fx);
+		}
+		if (bodyB == rightTopLight) {
+			right_bot_light_b = true;
+			App->audio->PlayFx(light_fx);
+		}
+		if (left_top_light_b == true && left_mid_light_b == true && left_bot_light_b == true) {
+			left_top_light_b = false;
+			left_mid_light_b = false;
+			left_bot_light_b = false;
+		}
+		if (mid_top_light_b == true && mid_mid_light_b == true && mid_bot_light_b == true) {
+			mid_top_light_b = false;
+			mid_mid_light_b = false;
+			mid_bot_light_b = false;
+		}
+		if (right_top_light_b == true && right_mid_light_b == true && right_bot_light_b == true) {
+			right_top_light_b = false;
+			right_mid_light_b = false;
+			right_bot_light_b = false;
+		}
+
 	}
 }
 bool ModuleSceneIntro::LoadMap() {
@@ -386,4 +450,10 @@ void ModuleSceneIntro::gameOver() {
 	LeftTopLight = false;
 	LeftMidLight = false;
 	LeftBotLight = false;
+	midTopLight = false;
+	midMidLight = false;
+	midBotLight = false;
+	rightTopLight = false;
+	rightMidLight = false;
+	rightBotLight = false;
 }

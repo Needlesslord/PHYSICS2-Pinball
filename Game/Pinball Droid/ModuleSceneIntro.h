@@ -82,6 +82,8 @@ public:
 	SDL_Texture* numLives_tex2;
 	SDL_Texture* numLives_tex3;
 	SDL_Texture* leftlight_tex;
+	SDL_Texture* midlight_tex;
+	SDL_Texture* rightlight_tex;
 
 	uint flipper_fx;
 	p2Point<int> ray;
@@ -97,7 +99,12 @@ public:
 	bool left_top_light_b = false;
 	bool left_mid_light_b = false;
 	bool left_bot_light_b = false;
-	
+	bool mid_top_light_b = false;
+	bool mid_mid_light_b = false;
+	bool mid_bot_light_b = false;
+	bool right_top_light_b = false;
+	bool right_mid_light_b = false;
+	bool right_bot_light_b = false;
 	//PLUNGER
 	bool standby = true;
 	int intensity = 0;
