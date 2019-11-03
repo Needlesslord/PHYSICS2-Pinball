@@ -65,6 +65,9 @@
     <ClInclude Include="ModuleUI.h">
       <Filter>UI+Fonts</Filter>
     </ClInclude>
+    <ClInclude Include="p2Animation.h">
+      <Filter>Header Files\Containers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
