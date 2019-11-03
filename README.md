@@ -15,7 +15,8 @@ It has been done only for educational purposes
 		Tutorial and Menu Pause not implemented
 		Not all combos and score implemented
 		Holes do not count for score
-		Images of "fire" and "green" for Kicker and bouncers do not work		
+		Images of "fire" and "green" for Kicker and bouncers do not work
+		Score not centered
 
 
 
@@ -110,9 +111,7 @@ CONTROLS:
 	[RIGHT ARROW]/[M]	Right flipper
 	[LEFT ARROW]/[Z] 	Left and Left-Up flippers
 	[DOWN ARROW]/[SPACE]	Kicker
-	[H]			Pause menu						***TO IMPLEMENT YET***
-	[S]			Activate/Deactivate sound (inside Pause Menu)		***TO IMPLEMENT YET***
-	
+	[ESC] 			To exit the game	
 
 
 DEBUG:

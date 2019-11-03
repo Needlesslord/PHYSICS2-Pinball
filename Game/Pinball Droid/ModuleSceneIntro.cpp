@@ -446,8 +446,8 @@ bool ModuleSceneIntro::LoadMap() {
 
 	bouncerTopLeft			= App->physics->CreateChain(0, 0, PivoteU, 46);//BOUNCER TOP - LEFT / LONE BOUNCER
 	bouncerTopLeft->body->SetType(b2_staticBody);
-	bouncerTopLeft->body->GetFixtureList()->SetRestitution(1.2F);
-	bouncerTopLeft->body->GetFixtureList()->SetFriction(0.3F);
+	bouncerTopLeft->body->GetFixtureList()->SetRestitution(1.1F);
+	bouncerTopLeft->body->GetFixtureList()->SetFriction(0.2F);
 
 	bouncerTriangleBot		= App->physics->CreateChain(0, 0, PivoteL, 54);//BOUNCER BOT
 	bouncerTriangleBot->body->SetType(b2_staticBody);
