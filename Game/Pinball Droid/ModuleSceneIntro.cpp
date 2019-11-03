@@ -52,6 +52,7 @@ bool ModuleSceneIntro::Start()
 	App->audio->LoadFx("pinball/New_ball.wav");
 	light_fx = App->audio->LoadFx("pinball/Light.wav");
 	bouncer_fx = App->audio->LoadFx("pinball/Bouncers.wav");
+	triangle_fx = App->audio->LoadFx("pinball/Assets/Triangle.wav");
 	//Activate combos
 	
 
@@ -262,7 +263,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB) {
 			sensor_arrows_left_b = true;
 		}
 		if (bodyB == bouncerTriangleLeft) {
-			App->renderer->Blit(App->scene_intro->bouncerHit, 0, 0, NULL, 1.0f);
+			/*App->renderer->Blit(App->scene_intro->bouncerHit, 0, 0, NULL, 1.0f);*/
 			App->audio->PlayFx(bouncer_fx);
 		
 		}
@@ -310,6 +311,14 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB) {
 		if (bodyB == rightTopLight) {
 			right_bot_light_b = true;
 			App->audio->PlayFx(light_fx);
+		}
+		if (bodyB == triangleLeftBouncer)
+		{
+			App->audio->PlayFx(triangle_fx);
+		}
+		if (bodyB == triangleRightBouncer)
+		{
+			App->audio->PlayFx(triangle_fx);
 		}
 		if (left_top_light_b == true && left_mid_light_b == true && left_bot_light_b == true) {
 			left_top_light_b = false;

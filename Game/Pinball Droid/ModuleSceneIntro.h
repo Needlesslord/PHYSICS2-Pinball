@@ -99,6 +99,7 @@ public:
 
 	uint flipper_fx;
 	uint bouncer_fx;
+	uint triangle_fx;
 	p2Point<int> ray;
 	bool ray_on;
 	int life = 0;
