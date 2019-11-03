@@ -317,7 +317,7 @@ bool ModuleSceneIntro::LoadMap() {
 	sensor_x5right = App->physics->CreateRectangleSensor(400, 65, 5, 5);
 	sensor_x10 = App->physics->CreateRectangleSensor(415, 256, 5, 5);
 	sensor_x20 = App->physics->CreateRectangleSensor(25, 720, 5, 5);
-	//ARROWS
+		//ARROWS
 	sensor_arrows_upright = App->physics->CreateRectangleSensor(15, 75, 5, 5);
 	sensor_arrows_uprleft = App->physics->CreateRectangleSensor(150, 70, 5, 5);
 	sensor_arrows_left = App->physics->CreateRectangleSensor(15, 245, 5, 5);
