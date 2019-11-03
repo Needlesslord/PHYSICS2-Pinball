@@ -3,6 +3,8 @@
 #include "p2List.h"
 #include "p2Point.h"
 #include "Globals.h"
+#include "p2Animation.h"
+
 
 class PhysBody;
 
@@ -13,11 +15,17 @@ public:
 	~ModuleSceneIntro();
 
 	bool Start();
+	update_status PreUpdate();
 	update_status Update();
+	update_status PostUpdate();
 	bool CleanUp();
 	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
+	bool LoadMap();
+
 
 public:
+
+	//Handouts -----------------
 	p2List<PhysBody*> circles;
 	p2List<PhysBody*> boxes;
 	p2List<PhysBody*> ricks;
@@ -29,9 +37,36 @@ public:
 	SDL_Texture* box;
 	SDL_Texture* rick;
 
-	SDL_Texture* assets;
-
 	uint bonus_fx;
 	p2Point<int> ray;
 	bool ray_on;
+
+	//-----------------------------
+
+	//The Game -------------------
+	SDL_Texture* assets;
+
+	//plunger
+	p2Animation			plungerlight;
+	PhysBody*			plunger;
+	b2PrismaticJoint*   plunger_joint;
+	uint				plunger_fx;
+	//flippers
+	PhysBody*			right_flipper;
+	PhysBody*			left_flipper;
+	PhysBody*			left_up_flipper;
+	b2RevoluteJoint*    right_joint;
+	b2RevoluteJoint*    left_joint;
+	b2RevoluteJoint*    left_up_joint;
+	uint				flipper_fx;
+
+
+
+
+	//Variables
+	bool death = false;
+
+
+	//---------------------------------
+
 };

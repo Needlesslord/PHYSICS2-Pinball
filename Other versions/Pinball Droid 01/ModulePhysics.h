@@ -45,12 +45,16 @@ public:
 	PhysBody* CreateCircle(int x, int y, int radius);
 	PhysBody* CreateRectangle(int x, int y, int width, int height);
 	PhysBody* CreateRectangleSensor(int x, int y, int width, int height);
-	PhysBody* CreateChain(int x, int y, int* points, int size);
+	PhysBody* CreateChain(int x, int y, int* points, int size/*, int width, int height*/);
 
 	// b2ContactListener ---
 	void BeginContact(b2Contact* contact);
 	void CreatePinballWalls();
+	PhysBody* CreateChainSensor(int x, int y, int* points, int size);
 
+public:
+	b2World* world;
+	b2Body* ground;
 
 private:
 
