@@ -150,9 +150,8 @@ public:
 	PhysBody* sensor_arrows_upright;
 	PhysBody* sensor_arrows_upleft;
 	PhysBody* sensor_arrows_left;
-
-
-
-
-
+	//sensors bonus
+	PhysBody* sensor_x2_left;
+	PhysBody* sensor_x2_mid;
+	PhysBody* sensor_x2_right;
 };
