@@ -7,10 +7,11 @@
 #include "ModuleAudio.h"
 #include "ModulePhysics.h"
 #include "Chain.h"
+#include "ModuleUI.h"
+#include "ModuleFonts.h"
 
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
-{
-}
+{}
 
 ModuleSceneIntro::~ModuleSceneIntro()
 {}
@@ -106,12 +107,14 @@ update_status ModuleSceneIntro::Update()
 	App->renderer->Blit(background_tex, 0, 0, NULL, 1.0f);
 
 	//NUMBER OF LIVES
-	if (numLives == 3)	App->renderer->Blit(numLives_tex3, 457, 708, NULL, 1.0f);
+	if (numLives == 3)		App->renderer->Blit(numLives_tex3, 457, 708, NULL, 1.0f);
 	else if (numLives == 2) App->renderer->Blit(numLives_tex2, 457, 708, NULL, 1.0f);
 	else if (numLives == 1) App->renderer->Blit(numLives_tex1, 457, 708, NULL, 1.0f);
-	else					App->renderer->Blit(numLives_tex0, 457, 708, NULL, 1.0f);
-
-
+	else {
+		App->renderer->Blit(numLives_tex0, 457, 708, NULL, 1.0f);
+		//App->ui->Score = 0; //not working
+	}
+	
 	// All draw functions --------------------------------------------------------------------
 
 	//FLIPPERS
@@ -217,6 +220,22 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB) {
 			left_bot_light_b = true;
 		}
 	}
+
+	//not working
+	//if (App->ui->Score >= 10 && App->ui->Score < 100) {
+	//	App->fonts->BlitText(205, 773, App->ui->font, App->ui->score);
+	//}
+	//else if (App->ui->Score >= 100 && App->ui->Score < 1000) {
+	//	App->fonts->BlitText(195, 773, App->ui->font, App->ui->score);
+	//}
+	//else if (App->ui->Score >= 1000 && App->ui->Score < 10000) {
+	//	App->fonts->BlitText(185, 773, App->ui->font, App->ui->score);
+	//}
+	//else if (App->ui->Score >= 10000) {
+	//	App->fonts->BlitText(175, 773, App->ui->font, App->ui->score);
+	//}
+	//else App->fonts->BlitText(215, 773, App->ui->font, App->ui->score);
+
 }
 bool ModuleSceneIntro::LoadMap() {
 	//BALL FIRST
@@ -371,8 +390,11 @@ bool ModuleSceneIntro::LoadMap() {
 	return true;
 }
 void ModuleSceneIntro::gameOver() {
+
+	//App->ui->Score = 0; //not working
 	numLives = 3;
 	LeftTopLight = false;
 	LeftMidLight = false;
 	LeftBotLight = false;
+
 }

@@ -19,6 +19,7 @@ bool ModuleUI::Start()
 	LOG("Loading UI");
 	score_font = App->fonts->Load("pinball/score_font.png" ,"0123456789", 1);
 	life_font = App->fonts->Load("pinball/life_font.png", "0123", 1);
+
 	return true;
 }
 
@@ -42,6 +43,4 @@ update_status ModuleUI::Update() {
 update_status ModuleUI::PostUpdate() {
 	return UPDATE_CONTINUE;
 }
-
-
 
