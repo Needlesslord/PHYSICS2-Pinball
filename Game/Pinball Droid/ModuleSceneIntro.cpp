@@ -74,6 +74,13 @@ bool ModuleSceneIntro::CleanUp()
 	App->textures->Unload(numLives_tex2);
 	App->textures->Unload(numLives_tex3);
 	App->textures->Unload(bouncerHit);
+	App->textures->Unload(rightUpArrows_tex);
+	App->textures->Unload(leftUpArrows_tex);
+	App->textures->Unload(leftArrows_tex);
+	App->textures->Unload(midlight_tex);
+	App->textures->Unload(rightlight_tex);
+	App->textures->Unload(leftlight_tex);
+	App->textures->Unload(bouncer_tex);
 
 	return true;
 }
