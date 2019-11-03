@@ -24,7 +24,7 @@ public:
 private:
 	bool LoadMap();
 public:
-
+	iPoint initialPosition;
 	PhysBody* sensor;
 	PhysBody* ball;
 	PhysBody* background;
@@ -77,7 +77,7 @@ public:
 	SDL_Texture* numLives_tex2;
 	SDL_Texture* numLives_tex3;
 
-	uint bonus_fx;
+	uint flipper_fx;
 	p2Point<int> ray;
 	bool ray_on;
 	int life = 0;
