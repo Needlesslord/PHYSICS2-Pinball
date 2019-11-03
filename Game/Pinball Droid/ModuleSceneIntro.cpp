@@ -118,19 +118,19 @@ update_status ModuleSceneIntro::Update()
 		App->renderer->Blit(ball_tex, x, y, NULL, 1.0f);
 	}
 	//FLIPPERS
-//LEFT
+		//LEFT
 	if (leftFlipper != NULL) {
 		int x, y;
 		leftFlipper->GetPosition(x, y);
 		App->renderer->Blit(leftFlipper_tex, x, y - 10, NULL, 1.0f, leftFlipper->GetRotation());
 	}
-	//LEFT-UP
+		//LEFT-UP
 	if (leftupFlipper != NULL) {
 		int x, y;
 		leftupFlipper->GetPosition(x, y);
 		App->renderer->Blit(leftupFlipper_tex, x, y - 10, NULL, 1.0f, leftFlipper->GetRotation());
 	}
-	//RIGHT
+		//RIGHT
 	if (rightFlipper != NULL) {
 		int x, y;
 		rightFlipper->GetPosition(x, y);
@@ -146,15 +146,11 @@ update_status ModuleSceneIntro::Update()
 
 	if (isDead)
 	{
-		if (numLives > 0) {
-			int x = initialPosition.x;
-			int y = initialPosition.y;
-			ball->body->GetWorld()->DestroyBody(ball->body);
-			ball = App->physics->CreateCircle(x, y, 15);
-			ball->listener = this;
-			isDead = false;
-		}
-		else gameOver();
+		ball->body->GetWorld()->DestroyBody(ball->body);
+		ball = App->physics->CreateCircle(initialPosition.x, initialPosition.y, 15);
+		ball->listener = this;
+		isDead = false;
+		if (numLives < 0)	gameOver();
 	}
 
 	return UPDATE_CONTINUE;
@@ -360,5 +356,5 @@ bool ModuleSceneIntro::LoadMap() {
 	return true;
 }
 void ModuleSceneIntro::gameOver() {
-
+	numLives = 3;
 }
