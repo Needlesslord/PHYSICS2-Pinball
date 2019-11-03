@@ -20,6 +20,8 @@ bool ModuleSceneIntro::Start()
 {
 	LOG("Loading Intro assets");
 	bool ret = true;
+	initialPosition.x = 454;
+	initialPosition.y = 421;
 
 	App->renderer->camera.x = App->renderer->camera.y = 0;
 
@@ -27,10 +29,13 @@ bool ModuleSceneIntro::Start()
 	ball_tex = App->textures->Load("pinball/Bola.png");
 	leftFlipper_tex = App->textures->Load("pinball/leftFlipper.png");
 	rightFlipper_tex = App->textures->Load("pinball/rightFlipper.png");
+	
 	numLives_tex0 = App->textures->Load("pinball/Numbers0.png");
 	numLives_tex1 = App->textures->Load("pinball/Numbers1.png");
 	numLives_tex2 = App->textures->Load("pinball/Numbers2.png");
 	numLives_tex3 = App->textures->Load("pinball/Numbers3.png");
+
+	flipper_fx = App->audio->LoadFx("pinball/Flipper.wav");
 	LoadMap();
 
 	return ret;
@@ -48,12 +53,17 @@ bool ModuleSceneIntro::CleanUp()
 	App->textures->Unload(numLives_tex1);
 	App->textures->Unload(numLives_tex2);
 	App->textures->Unload(numLives_tex3);
-
 	return true;
 }
 
 update_status ModuleSceneIntro::PreUpdate() {
-	
+	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT) {
+		leftFlipper->body->ApplyAngularImpulse(-2.0F, true);
+	}
+	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN || App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
+	{
+		App->audio->PlayFx(flipper_fx);
+	}
 
 	return UPDATE_CONTINUE;
 }
@@ -76,14 +86,14 @@ update_status ModuleSceneIntro::Update()
 	if (ball != NULL) {
 		int x, y;
 		ball->GetPosition(x, y);
-		App->renderer->Blit(ball_tex, x, y, NULL, 1.0f, ball->GetRotation());
+		App->renderer->Blit(ball_tex, x, y, NULL, 1.0f);
 	}
 		//FLIPPERS
 	//LEFT
 	if (leftFlipper != NULL) {
 		int x, y;
 		leftFlipper->GetPosition(x, y);
-		App->renderer->Blit(leftFlipper_tex, x, y, NULL, 1.0f, leftFlipper->GetRotation());
+		App->renderer->Blit(leftFlipper_tex, x, y - 10, NULL, 1.0f, leftFlipper->GetRotation());
 	}
 
 
@@ -106,13 +116,18 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB) {
 	if (bodyA == ball) {
 		if (bodyB == death) {
 			numLives--;
+			/*//DOESN'T WORK FOR SOME REASON
+			ball->body->GetWorld()->DestroyBody(ball->body);
+			ball = App->physics->CreateCircle(initialPosition.x, initialPosition.y, 15);
+			ball->listener = this;
+			*/
 		}
 	 }
 
 }
 bool ModuleSceneIntro::LoadMap() {
 	//BALL FIRST
-	ball = App->physics->CreateCircle(454, 421, 15);
+	ball = App->physics->CreateCircle(initialPosition.x, initialPosition.y, 15);
 	ball->body->SetBullet(true);
 	ball->body->GetFixtureList()->SetFriction(0.4f);
 	ball->listener = this;
@@ -126,7 +141,7 @@ bool ModuleSceneIntro::LoadMap() {
 
 	//FLIPPERS
 	//LEFT
-	leftFlipper = App->physics->CreateRectangle(195, 705, 85, 13);
+	leftFlipper = App->physics->CreateRectangle(190, 723, 85, 20);
 
 
 	//JOINTS-------------------------------------------------------------
@@ -134,12 +149,12 @@ bool ModuleSceneIntro::LoadMap() {
 			//LEFT
 	b2RevoluteJointDef leftFlipper_revolute;
 	PhysBody* circleLeft;
-	circleLeft = App->physics->CreateCircle(155, 705, 5);
+	circleLeft = App->physics->CreateCircle(161, 724, 10);
 	circleLeft->body->SetType(b2_staticBody);
 	leftFlipper_revolute.Initialize(leftFlipper->body, circleLeft->body, circleLeft->body->GetWorldCenter());
 	leftFlipper_revolute.collideConnected = false;
 	leftFlipper_revolute.enableLimit = true;
-	leftFlipper_revolute.lowerAngle = -20 * DEGTORAD;
+	leftFlipper_revolute.lowerAngle = -30 * DEGTORAD;
 	leftFlipper_revolute.upperAngle = 30 * DEGTORAD;
 	leftFlipper_joint = (b2RevoluteJoint*)App->physics->world->CreateJoint(&leftFlipper_revolute);
 	//RIGHT
