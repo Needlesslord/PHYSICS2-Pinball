@@ -36,6 +36,10 @@ bool ModuleSceneIntro::Start()
 	numLives_tex3 = App->textures->Load("pinball/Numbers3.png");
 
 	flipper_fx = App->audio->LoadFx("pinball/Flipper.wav");
+
+	//Activate combos
+	light_fx = App->audio->LoadFx("pinball/Light.wav");
+
 	LoadMap();
 
 	return ret;
@@ -73,7 +77,7 @@ update_status ModuleSceneIntro::PreUpdate() {
 	}
 	
 	//fx
-	if (App->input->GetKey(SDL_SCANCODE_M) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_Z) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN || App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN || App->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN || App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN || App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
 	{
 		App->audio->PlayFx(flipper_fx);
 	}

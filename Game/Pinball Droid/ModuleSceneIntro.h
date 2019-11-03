@@ -85,4 +85,26 @@ public:
 	bool standby = true;
 	uint intensity = 0;
 
+	//To activate combos
+	uint light_fx;
+	uint enterhole;
+	uint exxithole;
+	SDL_Texture* lightUp;
+	SDL_Texture* lightLeft;
+	SDL_Texture* lightU;
+	SDL_Texture* lightRight;
+	bool OnLight1 = false;
+	bool OnLight2 = false;
+	bool OnLight3 = false;
+	bool OnLight4 = false;
+	bool OnLight5 = false;
+	bool OnLight6 = false;
+	bool OnLight7 = false;
+	bool OnLight8 = false;
+	bool OnLight9 = false;
+	bool OnLight10 = false;
+
+
+
+
 };
