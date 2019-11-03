@@ -63,11 +63,14 @@ bool ModuleSceneIntro::CleanUp()
 update_status ModuleSceneIntro::PreUpdate() {
 
 	//move
-	if ((App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT))
-		if (standby) {
-			if (intensity <100) ball->body->ApplyLinearImpulse({ 0, -0.8f }, { 0,0 }, true/*, false*/);
+	if (standby) {
+		if ((App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT))
+		{
+			intensity++;
+			if (intensity < 100) ball->body->ApplyLinearImpulse({ 0, -0.8f }, { 0,0 }, true/*, false*/);
 			else int i = 0;
 		}
+	}
 
 	if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT) {
 		leftFlipper->body->ApplyAngularImpulse(-4.0F, true);
