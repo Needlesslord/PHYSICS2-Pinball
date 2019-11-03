@@ -85,6 +85,9 @@ public:
 	int life = 0;
 	bool alive = true;
 
+	//death to initial position
+	bool isDead = false;
+
 	//PLUNGER
 	bool standby = true;
 	int intensity = 0;
@@ -107,7 +110,6 @@ public:
 	bool OnLight8 = false;
 	bool OnLight9 = false;
 	bool OnLight10 = false;
-	
 	//sensors x5, x10, x20
 	PhysBody* sensor_x5up;
 	PhysBody* sensor_x5right;
