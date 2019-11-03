@@ -82,5 +82,6 @@ public:
 	bool ray_on;
 	int life = 0;
 	bool alive = true;
+	bool standby = true;
 
 };
