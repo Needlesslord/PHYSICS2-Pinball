@@ -28,6 +28,7 @@ bool ModuleSceneIntro::Start()
 	background_tex = App->textures->Load("pinball/Background.png");//TODO 100: LOAD ALL PNGs
 	ball_tex = App->textures->Load("pinball/Bola.png");
 	leftFlipper_tex = App->textures->Load("pinball/leftFlipper.png");
+	leftupFlipper_tex = App->textures->Load("pinball/leftFlipper.png");
 	rightFlipper_tex = App->textures->Load("pinball/rightFlipper.png");
 	
 	numLives_tex0 = App->textures->Load("pinball/Numbers0.png");
@@ -52,6 +53,7 @@ bool ModuleSceneIntro::CleanUp()
 	App->textures->Unload(background_tex);//TODO 101: UNLOAD EVERYTHING
 	App->textures->Unload(ball_tex);
 	App->textures->Unload(leftFlipper_tex);
+	App->textures->Unload(leftupFlipper_tex);
 	App->textures->Unload(rightFlipper_tex);
 	App->textures->Unload(numLives_tex0);
 	App->textures->Unload(numLives_tex1);
@@ -77,6 +79,8 @@ update_status ModuleSceneIntro::PreUpdate() {
 
 	if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT) {
 		leftFlipper->body->ApplyAngularImpulse(-4.0F, true);
+		leftupFlipper->body->ApplyAngularImpulse(-4.0F, true);
+
 	}
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_M) == KEY_REPEAT) {
 		rightFlipper->body->ApplyAngularImpulse(4.0F, true);
@@ -117,6 +121,11 @@ update_status ModuleSceneIntro::Update()
 		int x, y;
 		leftFlipper->GetPosition(x, y);
 		App->renderer->Blit(leftFlipper_tex, x, y - 10, NULL, 1.0f, leftFlipper->GetRotation());
+	}
+	if (leftupFlipper != NULL) {
+		int x, y;
+		leftupFlipper->GetPosition(x, y);
+		App->renderer->Blit(leftupFlipper_tex, x, y - 10, NULL, 1.0f, leftFlipper->GetRotation());
 	}
 	if (rightFlipper != NULL) {
 		int x, y;
@@ -228,6 +237,7 @@ bool ModuleSceneIntro::LoadMap() {
 	//FLIPPERS
 	//LEFT
 	leftFlipper = App->physics->CreateRectangle(182, 727, 80, 20);
+	leftupFlipper = App->physics->CreateRectangle(85, 247, 80, 20);
 	rightFlipper = App->physics->CreateRectangle(296, 727, 80, 20);
 
 
@@ -244,6 +254,18 @@ bool ModuleSceneIntro::LoadMap() {
 	leftFlipper_revolute.lowerAngle = -30 * DEGTORAD;
 	leftFlipper_revolute.upperAngle = 30 * DEGTORAD;
 	leftFlipper_joint = (b2RevoluteJoint*)App->physics->world->CreateJoint(&leftFlipper_revolute);
+			//LEFT-UP
+	b2RevoluteJointDef leftupFlipper_revolute;
+	PhysBody* circleLeftup;
+	circleLeftup = App->physics->CreateCircle(56, 247, 10);
+	circleLeftup->body->SetType(b2_staticBody);
+	leftupFlipper_revolute.Initialize(leftupFlipper->body, circleLeftup->body, circleLeftup->body->GetWorldCenter());
+	leftupFlipper_revolute.collideConnected = false;
+	leftupFlipper_revolute.enableLimit = true;
+	leftupFlipper_revolute.lowerAngle = -30 * DEGTORAD;
+	leftupFlipper_revolute.upperAngle = 30 * DEGTORAD;
+	leftupFlipper_joint = (b2RevoluteJoint*)App->physics->world->CreateJoint(&leftupFlipper_revolute);
+
 			//RIGHT
 	b2RevoluteJointDef rightFlipper_revolute;
 	PhysBody* circleRight;

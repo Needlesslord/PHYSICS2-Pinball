@@ -63,8 +63,10 @@ public:
 	PhysBody* standby_sensor;
 	PhysBody* rightFlipper;
 	PhysBody* leftFlipper;
+	PhysBody* leftupFlipper;
 
 	b2RevoluteJoint* leftFlipper_joint;
+	b2RevoluteJoint* leftupFlipper_joint;
 	b2RevoluteJoint* rightFlipper_joint;
 
 	bool sensed;
@@ -72,6 +74,7 @@ public:
 	SDL_Texture* background_tex;
 	SDL_Texture* ball_tex;
 	SDL_Texture* leftFlipper_tex;
+	SDL_Texture* leftupFlipper_tex;
 	SDL_Texture* rightFlipper_tex;
 	SDL_Texture* numLives_tex0;
 	SDL_Texture* numLives_tex1;
