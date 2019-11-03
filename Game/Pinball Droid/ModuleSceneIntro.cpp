@@ -147,7 +147,8 @@ update_status ModuleSceneIntro::Update()
 		ball = App->physics->CreateCircle(initialPosition.x, initialPosition.y, 15);
 		ball->listener = this;
 		isDead = false;
-		if (numLives < 0)	gameOver();
+		standby = true;
+		if (numLives < 0) gameOver();
 	}
 
 	return UPDATE_CONTINUE;
@@ -189,102 +190,88 @@ bool ModuleSceneIntro::LoadMap() {
 	//BALL FIRST
 	ball = App->physics->CreateCircle(initialPosition.x, initialPosition.y, 15);
 	ball->body->SetBullet(true);
-	ball->body->GetFixtureList()->SetFriction(0.5f);
+	ball->body->GetFixtureList()->SetFriction(0.4f);
 	ball->listener = this;
 	numLives = 2;
 
 	//BACKGROUND
 	background				= App->physics->CreateChain(0, 0, Background, 180);
 	background->body->SetType(b2_staticBody);
-
 	triangleLeft			= App->physics->CreateChain(0, 0, BackgroundL, 14);//TRIANGLE LEFT
 	triangleLeft->body->SetType(b2_staticBody);
-
 	triangleRight			= App->physics->CreateChain(0, 0, BackgroundR, 18);//TRIANGLE RIGHT
 	triangleRight->body->SetType(b2_staticBody);
-
 	curvePostTriangleLeft	= App->physics->CreateChain(0, 0, ChainL, 16);//CURVE POST TRIANGLE LEFT
 	curvePostTriangleLeft->body->SetType(b2_staticBody);
-
 	curvePostTriangleRight	= App->physics->CreateChain(0, 0, ChainR, 22);//CURVE POST TRIANGLE RIGHT
 	curvePostTriangleRight->body->SetType(b2_staticBody);
-
 	topFlipperBase			= App->physics->CreateChain(0, 0, BackgroundU, 20);//TOP FLIPPER BASE
 	topFlipperBase->body->SetType(b2_staticBody);
-
 	threeButtonStick		= App->physics->CreateChain(0, 0, BackgroundLine, 8);//THREE BUTTONS STICK
 	threeButtonStick->body->SetType(b2_staticBody);
-
+	
 	bouncerTriangleLeft		= App->physics->CreateChain(0, 0, PivoteUR, 42);//BOUNCER TOP - MID
 	bouncerTriangleLeft->body->SetType(b2_staticBody);
 	bouncerTriangleLeft->body->GetFixtureList()->SetRestitution(1.2F);
-	bouncerTriangleLeft->body->GetFixtureList()->SetFriction(0.5F);
-
+	bouncerTriangleLeft->body->GetFixtureList()->SetFriction(0.3F);
+	
 	bouncerTriangleRight	= App->physics->CreateChain(0, 0, PivoteUL, 40);//BOUNCER TOP-RIGHT
 	bouncerTriangleRight->body->SetType(b2_staticBody);
+	bouncerTriangleRight->body->GetFixtureList()->SetRestitution(1.2F);
+	bouncerTriangleRight->body->GetFixtureList()->SetFriction(0.3F);
 
 	bouncerTopLeft			= App->physics->CreateChain(0, 0, PivoteU, 46);//BOUNCER TOP - LEFT / LONE BOUNCER
 	bouncerTopLeft->body->SetType(b2_staticBody);
+	bouncerTopLeft->body->GetFixtureList()->SetRestitution(1.2F);
+	bouncerTopLeft->body->GetFixtureList()->SetFriction(0.3F);
 
 	bouncerTriangleBot		= App->physics->CreateChain(0, 0, PivoteL, 54);//BOUNCER BOT
 	bouncerTriangleBot->body->SetType(b2_staticBody);
+	bouncerTriangleBot->body->GetFixtureList()->SetRestitution(1.2F);
+	bouncerTriangleBot->body->GetFixtureList()->SetFriction(0.3F);
 
 	triangleLeftBouncer		= App->physics->CreateChain(0, 0, BouncyL, 8);
 	triangleLeftBouncer->body->SetType(b2_staticBody);
+	triangleLeftBouncer->body->GetFixtureList()->SetRestitution(1.2f);
+	triangleLeftBouncer->body->GetFixtureList()->SetFriction(0.3f);
 
 	triangleRightBouncer	= App->physics->CreateChain(0, 0, BouncyR, 8);
 	triangleRightBouncer->body->SetType(b2_staticBody);
+	triangleRightBouncer->body->GetFixtureList()->SetRestitution(1.2f);
+	triangleRightBouncer->body->GetFixtureList()->SetFriction(0.3f);
 
 	doubleBonusLeftBar		= App->physics->CreateChain(0, 0, BarraL, 12);
 	doubleBonusLeftBar->body->SetType(b2_staticBody);
-
 	doubleBonusRightBar		= App->physics->CreateChain(0, 0, BarraR, 12);
 	doubleBonusRightBar->body->SetType(b2_staticBody);
-
 	x5multiplierTop			= App->physics->CreateChain(0, 0, Hole1, 12);
 	x5multiplierTop->body->SetType(b2_staticBody);
-
 	x5multiplierTopRight	= App->physics->CreateChain(0, 0, Hole2, 10);
-	x5multiplierTopRight->body->SetType(b2_staticBody);
-	
+	x5multiplierTopRight->body->SetType(b2_staticBody);	
 	x10multiplier			= App->physics->CreateChain(0, 0, Hole3, 14);
 	x10multiplier->body->SetType(b2_staticBody);
-
 	x20multiplier			= App->physics->CreateChain(0, 0, Hole4, 12);
-	x20multiplier->body->SetType(b2_staticBody);
-	
-	x20multiplierLight = App->physics->CreateChain(0, 0, Light1, 12);
+	x20multiplier->body->SetType(b2_staticBody);	
+	x20multiplierLight		= App->physics->CreateChain(0, 0, Light1, 12);
 	x20multiplierLight->body->SetType(b2_staticBody);
-
-	leftBotLight = App->physics->CreateChain(0, 0, Light2, 10);
+	leftBotLight			= App->physics->CreateChain(0, 0, Light2, 10);
 	leftBotLight->body->SetType(b2_staticBody);
-
-	LeftMidLight = App->physics->CreateChain(0, 0, Light3, 10);
+	LeftMidLight			= App->physics->CreateChain(0, 0, Light3, 10);
 	LeftMidLight->body->SetType(b2_staticBody);
-
-	LeftTopLight = App->physics->CreateChain(0, 0, Light4, 8);
+	LeftTopLight			= App->physics->CreateChain(0, 0, Light4, 8);
 	LeftTopLight->body->SetType(b2_staticBody);
-
-	midTopLight = App->physics->CreateChain(0, 0, Light5, 12);
+	midTopLight				= App->physics->CreateChain(0, 0, Light5, 12);
 	midTopLight->body->SetType(b2_staticBody);
-
-	midMidLight = App->physics->CreateChain(0, 0, Light6, 12);
+	midMidLight				= App->physics->CreateChain(0, 0, Light6, 12);
 	midMidLight->body->SetType(b2_staticBody);
-
-	midBotLight = App->physics->CreateChain(0, 0, Light7, 12);
+	midBotLight				= App->physics->CreateChain(0, 0, Light7, 12);
 	midBotLight->body->SetType(b2_staticBody);
-
-	rightTopLight = App->physics->CreateChain(0, 0, Light8, 10);
+	rightTopLight			= App->physics->CreateChain(0, 0, Light8, 10);
 	rightTopLight->body->SetType(b2_staticBody);
-
-	rightMidLight = App->physics->CreateChain(0, 0, Light9, 12);
+	rightMidLight			= App->physics->CreateChain(0, 0, Light9, 12);
 	rightMidLight->body->SetType(b2_staticBody);
-
-	rightBotLight = App->physics->CreateChain(0, 0, Light10, 12);
+	rightBotLight			= App->physics->CreateChain(0, 0, Light10, 12);
 	rightBotLight->body->SetType(b2_staticBody);
-
-
-
 
 	//FLIPPERS
 	//LEFT
@@ -293,7 +280,7 @@ bool ModuleSceneIntro::LoadMap() {
 	rightFlipper = App->physics->CreateRectangle(296, 727, 80, 20);
 
 
-	//JOINTS-------------------------------------------------------------
+	//JOINTS------------------------------------------------------------------------------------------------------------
 		//FLIPPERS
 			//LEFT
 	b2RevoluteJointDef leftFlipper_revolute;
@@ -306,6 +293,7 @@ bool ModuleSceneIntro::LoadMap() {
 	leftFlipper_revolute.lowerAngle = -30 * DEGTORAD;
 	leftFlipper_revolute.upperAngle = 30 * DEGTORAD;
 	leftFlipper_joint = (b2RevoluteJoint*)App->physics->world->CreateJoint(&leftFlipper_revolute);
+
 			//LEFT-UP
 	b2RevoluteJointDef leftupFlipper_revolute;
 	PhysBody* circleLeftup;
