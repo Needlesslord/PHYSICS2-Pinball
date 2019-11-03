@@ -183,7 +183,6 @@ update_status ModuleSceneIntro::PostUpdate() {
 }
 
 void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB) {
-
 	if (bodyA == ball) {
 		if (bodyB == death) {
 			numLives--;

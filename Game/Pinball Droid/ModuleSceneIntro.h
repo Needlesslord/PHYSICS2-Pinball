@@ -88,6 +88,7 @@ public:
 	bool ray_on;
 	int life = 0;
 	bool alive = true;
+	int multiplier;
 
 	//death to initial position
 	bool isDead = false;

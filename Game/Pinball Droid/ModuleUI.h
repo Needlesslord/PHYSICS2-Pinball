@@ -21,7 +21,7 @@ public:
 
 	int score_font = 0;
 	int life_font = 0;
-	int score_player = 0;
+	int score_player = 400000;
 	int high_score = 0;
 	char score_string[10];
 	char high_score_string[10];
