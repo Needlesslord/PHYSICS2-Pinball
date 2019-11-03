@@ -134,12 +134,9 @@ update_status ModuleSceneIntro::Update()
 		rightFlipper->GetPosition(x, y);
 		App->renderer->Blit(rightFlipper_tex, x, y - 10, NULL, 1.0f, rightFlipper->GetRotation());
 	}
-
-	//Death and move ball to initial position
 	
 	if (isDead)
 	{
-		//código debug tecla 1
 		int x = initialPosition.x;
 		int y = initialPosition.y;
 		ball->body->GetWorld()->DestroyBody(ball->body);
@@ -166,12 +163,13 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB) {
 	if (bodyA == ball) {
 		if (bodyB == death) {
 			numLives--;
-			//DOESN'T WORK FOR SOME REASON
 			isDead = true;
 		}
 		if (bodyB == standby_sensor) {
 			standby = false;
 		}
+
+
 	 }
 
 }
