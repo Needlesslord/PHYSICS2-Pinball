@@ -123,6 +123,63 @@ bool ModuleSceneIntro::LoadMap() {
 	background->body->SetType(b2_staticBody);
 	backgroundL = App->physics->CreateChain(0, 0, BackgroundL, 14);
 	backgroundL->body->SetType(b2_staticBody);
+	backgroundR = App->physics->CreateChain(0, 0, BackgroundR, 18);
+	backgroundR->body->SetType(b2_staticBody);
+	chainL = App->physics->CreateChain(0, 0, ChainL, 16);
+	chainL->body->SetType(b2_staticBody);
+	chainR = App->physics->CreateChain(0, 0, ChainR, 22);
+	chainR->body->SetType(b2_staticBody);
+	backgroundU = App->physics->CreateChain(0, 0, BackgroundU, 20);
+	backgroundU->body->SetType(b2_staticBody);
+	backgroundLine = App->physics->CreateChain(0, 0, BackgroundLine, 8);
+	backgroundLine->body->SetType(b2_staticBody);
+	pivoteUR = App->physics->CreateChain(0, 0, PivoteUR, 42);
+	pivoteUR->body->SetType(b2_staticBody);
+	pivoteUL = App->physics->CreateChain(0, 0, PivoteUL, 40);
+	pivoteUL->body->SetType(b2_staticBody);
+	pivoteU = App->physics->CreateChain(0, 0, PivoteU, 46);
+	pivoteU->body->SetType(b2_staticBody);
+	pivoteL = App->physics->CreateChain(0, 0, PivoteL, 54);
+	pivoteL->body->SetType(b2_staticBody);
+	bouncyL = App->physics->CreateChain(0, 0, BouncyL, 8);
+	bouncyL->body->SetType(b2_staticBody);
+	bouncyR = App->physics->CreateChain(0, 0, BouncyR, 8);
+	bouncyR->body->SetType(b2_staticBody);
+	barraL = App->physics->CreateChain(0, 0, BarraL, 12);
+	barraL->body->SetType(b2_staticBody);
+	barraR = App->physics->CreateChain(0, 0, BarraR, 12);
+	barraR->body->SetType(b2_staticBody);
+	hole1 = App->physics->CreateChain(0, 0, Hole1, 12);
+	hole1->body->SetType(b2_staticBody);
+	hole2 = App->physics->CreateChain(0, 0, Hole2, 10);
+	hole2->body->SetType(b2_staticBody);
+	hole3 = App->physics->CreateChain(0, 0, Hole3, 14);
+	hole3->body->SetType(b2_staticBody);
+	hole4 = App->physics->CreateChain(0, 0, Hole4, 12);
+	hole4->body->SetType(b2_staticBody);
+	light1 = App->physics->CreateChain(0, 0, Light1, 12);
+	light1->body->SetType(b2_staticBody);
+	light2 = App->physics->CreateChain(0, 0, Light2, 10);
+	light2->body->SetType(b2_staticBody);
+	light3 = App->physics->CreateChain(0, 0, Light3, 10);
+	light3->body->SetType(b2_staticBody);
+	light4 = App->physics->CreateChain(0, 0, Light4, 8);
+	light4->body->SetType(b2_staticBody);
+	light5 = App->physics->CreateChain(0, 0, Light5, 12);
+	light5->body->SetType(b2_staticBody);
+	light6 = App->physics->CreateChain(0, 0, Light6, 12);
+	light6->body->SetType(b2_staticBody);
+	light7 = App->physics->CreateChain(0, 0, Light7, 12);
+	light7->body->SetType(b2_staticBody);
+	light8 = App->physics->CreateChain(0, 0, Light8, 10);
+	light8->body->SetType(b2_staticBody);
+	light9 = App->physics->CreateChain(0, 0, Light9, 12);
+	light9->body->SetType(b2_staticBody);
+	light10 = App->physics->CreateChain(0, 0, Light10, 12);
+	light10->body->SetType(b2_staticBody);
+
+
+
 
 	//FLIPPERS
 	//LEFT
