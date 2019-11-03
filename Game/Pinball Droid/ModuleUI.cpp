@@ -51,7 +51,7 @@ update_status ModuleUI::Update()
 	sprintf_s(life_string, 4, "%1d", App->scene_intro->life);
 
 	App->fonts->BlitText(394, 362, life_font, life_string);
-	if (App->scene_intro->death)
+	if (App->scene_intro->alive==false)
 	{
 		if (timer)
 		{
@@ -61,7 +61,7 @@ update_status ModuleUI::Update()
 		current_time = SDL_GetTicks() - time_on_entry;
 		if (current_time > 1500)
 		{
-			App->scene_intro->death = false;
+			App->scene_intro->alive = true;
 			timer = true;
 		}
 		SDL_Rect rect = { 0,0,SCREEN_WIDTH, SCREEN_HEIGHT };
@@ -78,7 +78,7 @@ update_status ModuleUI::PostUpdate()
 {
 	if (App->scene_intro->life == 0)
 	{
-		App->scene_intro->death = true;
+		App->scene_intro->alive = false;
 		if (score_player > high_score)
 		{
 			high_score = score_player;
