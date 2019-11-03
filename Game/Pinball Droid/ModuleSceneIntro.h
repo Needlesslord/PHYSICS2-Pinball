@@ -84,6 +84,9 @@ public:
 	SDL_Texture* leftlight_tex;
 	SDL_Texture* midlight_tex;
 	SDL_Texture* rightlight_tex;
+	SDL_Texture* sensor_x2_left_tex;
+	SDL_Texture* sensor_x2_mid_tex;
+	SDL_Texture* sensor_x2_right_tex;
 
 	//BouncerHit
 	SDL_Texture* bouncerHit = nullptr;
@@ -117,6 +120,10 @@ public:
 	bool right_top_light_b = false;
 	bool right_mid_light_b = false;
 	bool right_bot_light_b = false;
+	bool sensor_x2_left_b = false;
+	bool sensor_x2_mid_b = false;
+	bool sensor_x2_right_b = false;
+	bool sensor_x2_all_b = false;
 	//PLUNGER
 	bool standby = true;
 	int intensity = 0;
@@ -152,4 +159,7 @@ public:
 	PhysBody* sensor_x2_left;
 	PhysBody* sensor_x2_mid;
 	PhysBody* sensor_x2_right;
+
+	//TIMERS
+	int sensor_x5up_timer = 0;
 };

@@ -28,18 +28,21 @@ bool ModuleSceneIntro::Start()
 
 	App->renderer->camera.x = App->renderer->camera.y = 0;
 
-	background_tex = App->textures->Load("pinball/Background.png");//TODO 100: LOAD ALL PNGs
-	ball_tex = App->textures->Load("pinball/Bola.png");
-	leftFlipper_tex = App->textures->Load("pinball/leftFlipper.png");
-	leftupFlipper_tex = App->textures->Load("pinball/leftFlipper.png");
-	rightFlipper_tex = App->textures->Load("pinball/rightFlipper.png");
-	rightUpArrows_tex = App->textures->Load("pinball/left.png");
-	leftUpArrows_tex = App->textures->Load("pinball/right.png");
-	leftArrows_tex = App->textures->Load("pinball/Up.png");
-	leftlight_tex = App->textures->Load("pinball/L_Light.png");
-	midlight_tex = App->textures->Load("pinball/u_Light.png");
-	rightlight_tex = App->textures->Load("pinball/R_light.png");
-	
+	background_tex		= App->textures->Load("pinball/Background.png");//TODO 100: LOAD ALL PNGs
+	ball_tex			= App->textures->Load("pinball/Bola.png");
+	leftFlipper_tex		= App->textures->Load("pinball/leftFlipper.png");
+	leftupFlipper_tex	= App->textures->Load("pinball/leftFlipper.png");
+	rightFlipper_tex	= App->textures->Load("pinball/rightFlipper.png");
+	rightUpArrows_tex	= App->textures->Load("pinball/left.png");
+	leftUpArrows_tex	= App->textures->Load("pinball/right.png");
+	leftArrows_tex		= App->textures->Load("pinball/Up.png");
+	leftlight_tex		= App->textures->Load("pinball/L_Light.png");
+	midlight_tex		= App->textures->Load("pinball/u_Light.png");
+	rightlight_tex		= App->textures->Load("pinball/R_light.png");
+	sensor_x2_left_tex	= App->textures->Load("pinball/Active_Point.png");
+	sensor_x2_mid_tex	= App->textures->Load("pinball/Active_Point.png");
+	sensor_x2_right_tex = App->textures->Load("pinball/Active_Point.png");
+
 	numLives_tex0 = App->textures->Load("pinball/Numbers0.png");
 	numLives_tex1 = App->textures->Load("pinball/Numbers1.png");
 	numLives_tex2 = App->textures->Load("pinball/Numbers2.png");
@@ -182,6 +185,31 @@ update_status ModuleSceneIntro::Update()
 	if ((rightBotLight != NULL) && (right_bot_light_b == true)) {
 		App->renderer->Blit(rightlight_tex, 415, 431);
 	}
+	if (sensor_x2_left_b && !sensor_x2_all_b) {
+		int x, y;
+		sensor_x2_left->GetPosition(x, y);
+		App->renderer->Blit(sensor_x2_left_tex, x, y);
+	}
+	if (sensor_x2_mid_b && !sensor_x2_all_b) {
+		int x, y;
+		sensor_x2_mid->GetPosition(x, y);
+		App->renderer->Blit(sensor_x2_mid_tex, x, y);
+	}
+	if (sensor_x2_right_b && !sensor_x2_all_b) {
+		int x, y;
+		sensor_x2_right->GetPosition(x, y);
+		App->renderer->Blit(sensor_x2_right_tex, x, y);
+	}
+	if (sensor_x2_left_b && sensor_x2_mid_b && sensor_x2_right_b) {
+		sensor_x2_all_b = true;
+		multiplier *= 2;
+	}
+	if (sensor_x2_left_b && sensor_x2_mid_b && sensor_x2_right_b) {
+		sensor_x2_left_b = false;
+		sensor_x2_mid_b = false;
+		sensor_x2_right_b = false;
+		sensor_x2_all_b = false;
+	}
 	if (isDead)
 	{
 		ball->body->GetWorld()->DestroyBody(ball->body);
@@ -307,6 +335,39 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB) {
 			right_top_light_b = false;
 			right_mid_light_b = false;
 			right_bot_light_b = false;
+		}
+		if (bodyB == sensor_x2_left) {
+			sensor_x2_left_b = true;
+		}
+		if (bodyB == sensor_x2_mid) {
+			sensor_x2_mid_b = true;
+		}
+		if (bodyB == sensor_x2_right) {
+			sensor_x2_right_b = true;
+		}
+		if (bodyB == sensor_x5up) {
+			b2Vec2 v;
+			v.x = 0;
+			v.y = 10;
+			ball->body->SetLinearVelocity(v);
+		}
+		if (bodyB == sensor_x5right) {
+			b2Vec2 v;
+			v.x = 0;
+			v.y = 10;
+			ball->body->SetLinearVelocity(v);
+		}
+		if (bodyB == sensor_x10) {
+			b2Vec2 v;
+			v.x = 0;
+			v.y = 10;
+			ball->body->SetLinearVelocity(v);
+		}
+		if (bodyB == sensor_x20) {
+			b2Vec2 v;
+			v.x = 0;
+			v.y = -10;
+			ball->body->SetLinearVelocity(v);
 		}
 	}
 }
@@ -451,9 +512,9 @@ bool ModuleSceneIntro::LoadMap() {
 		//STANDBY
 	standby_sensor			= App->physics->CreateRectangleSensor(390,  20, 1, 25);
 		//x5, x10, x20
-	sensor_x5up				= App->physics->CreateRectangleSensor(202,  32, 5, 5);
-	sensor_x5right			= App->physics->CreateRectangleSensor(400,  65, 5, 5);
-	sensor_x10				= App->physics->CreateRectangleSensor(415, 256, 5, 5);
+	sensor_x5up				= App->physics->CreateRectangleSensor(202,  33, 5, 5);
+	sensor_x5right			= App->physics->CreateRectangleSensor(400,  70, 5, 5);
+	sensor_x10				= App->physics->CreateRectangleSensor(415, 260, 5, 5);
 	sensor_x20				= App->physics->CreateRectangleSensor( 25, 720, 5, 5);
 		//ARROWS
 	sensor_arrows_upright	= App->physics->CreateRectangleSensor( 15,  75, 5, 5);
