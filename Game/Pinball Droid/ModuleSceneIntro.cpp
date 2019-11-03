@@ -31,6 +31,7 @@ bool ModuleSceneIntro::Start()
 	leftupFlipper_tex = App->textures->Load("pinball/leftFlipper.png");
 	rightFlipper_tex = App->textures->Load("pinball/rightFlipper.png");
 	rightUpArrows_tex = App->textures->Load("pinball/left.png");
+	leftUpArrows_tex = App->textures->Load("pinball/right.png");
 	
 	numLives_tex0 = App->textures->Load("pinball/Numbers0.png");
 	numLives_tex1 = App->textures->Load("pinball/Numbers1.png");
@@ -139,7 +140,9 @@ update_status ModuleSceneIntro::Update()
 	if ((sensor_arrows_upright != NULL) && (sensor_arrows_upright_b == true)){
 		App->renderer->Blit(rightUpArrows_tex, 96, 19);
 	}
-
+	if ((sensor_arrows_upleft != NULL) && (sensor_arrows_upleft_b == true)) {
+		App->renderer->Blit(leftUpArrows_tex, 5, 19);
+	}
 
 	if (isDead)
 	{
@@ -184,6 +187,10 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB) {
 		if (bodyB == sensor_arrows_upright && ball->body->GetLinearVelocity().y > 0) {
 			sensor_arrows_upright_b = true;
 		}
+		if (bodyB == sensor_arrows_upleft && ball->body->GetLinearVelocity().y > 0) {
+			sensor_arrows_upleft_b = true;
+		}
+		
 		if (bodyB == bouncerTriangleLeft) {
 
 		}
@@ -347,7 +354,7 @@ bool ModuleSceneIntro::LoadMap() {
 	sensor_x20 = App->physics->CreateRectangleSensor(25, 720, 5, 5);
 		//ARROWS
 	sensor_arrows_upright = App->physics->CreateRectangleSensor(15, 75, 5, 5);
-	sensor_arrows_uprleft = App->physics->CreateRectangleSensor(150, 70, 5, 5);
+	sensor_arrows_upleft = App->physics->CreateRectangleSensor(150, 70, 5, 5);
 	sensor_arrows_left = App->physics->CreateRectangleSensor(15, 245, 5, 5);
 
 	return true;

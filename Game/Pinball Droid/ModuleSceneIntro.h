@@ -122,7 +122,7 @@ public:
 	PhysBody* sensor_x20;
 	//sensors arrows
 	PhysBody* sensor_arrows_upright;
-	PhysBody* sensor_arrows_uprleft;
+	PhysBody* sensor_arrows_upleft;
 	PhysBody* sensor_arrows_left;
 
 
