@@ -283,12 +283,15 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB) {
 			standby = false;
 		}
 		if (bodyB == sensor_arrows_upright && ball->body->GetLinearVelocity().y > 0) {
+			App->ui->score_player += 500 * multiplier;
 			sensor_arrows_upright_b = true;
 		}
 		if (bodyB == sensor_arrows_upleft && ball->body->GetLinearVelocity().y > 0) {
+			App->ui->score_player += 500 * multiplier;
 			sensor_arrows_upleft_b = true;
 		}
 		if (bodyB == sensor_arrows_left && ball->body->GetLinearVelocity().y < 0) {
+			App->ui->score_player += 500 * multiplier;
 			sensor_arrows_left_b = true;
 		}
 		if (bodyB == bouncerTriangleLeft) {
@@ -298,12 +301,18 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB) {
 		}
 		if (bodyB == bouncerTopLeft) {
 			App->audio->PlayFx(bouncer_fx);
+			App->ui->score_player += 100 * multiplier;
+
 		}
 		if (bodyB == bouncerTriangleRight) {
 			App->audio->PlayFx(bouncer_fx);
+			App->ui->score_player += 100 * multiplier;
+
 		}
 		if (bodyB == bouncerTriangleBot) {
 			App->audio->PlayFx(bouncer_fx);
+			App->ui->score_player += 100 * multiplier;
+
 		}
 		if (bodyB == LeftTopLight) {
 			left_top_light_b = true;
@@ -352,10 +361,12 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB) {
 		}
 		if (bodyB == triangleLeftBouncer)
 		{
+			App->ui->score_player += 100 * multiplier;
 			App->audio->PlayFx(triangle_fx);
 		}
 		if (bodyB == triangleRightBouncer)
 		{
+			App->ui->score_player += 100 * multiplier;
 			App->audio->PlayFx(triangle_fx);
 		}
 		if (left_top_light_b == true && left_mid_light_b == true && left_bot_light_b == true) {
@@ -387,24 +398,29 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB) {
 			v.x = 0;
 			v.y = 10;
 			ball->body->SetLinearVelocity(v);
+			App->ui->score_player += 1000 * multiplier;
+
 		}
 		if (bodyB == sensor_x5right) {
 			b2Vec2 v;
 			v.x = 0;
 			v.y = 10;
 			ball->body->SetLinearVelocity(v);
+			App->ui->score_player += 1000 * multiplier;
 		}
 		if (bodyB == sensor_x10) {
 			b2Vec2 v;
 			v.x = 0;
 			v.y = 10;
 			ball->body->SetLinearVelocity(v);
+			App->ui->score_player += 1000 * multiplier;
 		}
 		if (bodyB == sensor_x20) {
 			b2Vec2 v;
 			v.x = 0;
 			v.y = -10;
 			ball->body->SetLinearVelocity(v);
+			App->ui->score_player += 1000 * multiplier;
 		}
 	}
 
