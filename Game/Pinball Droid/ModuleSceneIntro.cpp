@@ -24,11 +24,13 @@ bool ModuleSceneIntro::Start()
 
 	background_tex = App->textures->Load("pinball/Background.png");//TODO 100: LOAD ALL PNGs
 	ball_tex = App->textures->Load("pinball/Bola.png");
+	leftFlipper_tex = App->textures->Load("pinball/leftFlipper.png");
+	rightFlipper_tex = App->textures->Load("pinball/rightFlipper.png");
 	numLives_tex0 = App->textures->Load("pinball/Numbers0.png");
 	numLives_tex1 = App->textures->Load("pinball/Numbers1.png");
 	numLives_tex2 = App->textures->Load("pinball/Numbers2.png");
 	numLives_tex3 = App->textures->Load("pinball/Numbers3.png");
-	ret = LoadMap();
+	LoadMap();
 
 	return ret;
 }
@@ -39,6 +41,8 @@ bool ModuleSceneIntro::CleanUp()
 	LOG("Unloading Intro scene");
 	App->textures->Unload(background_tex);//TODO 101: UNLOAD EVERYTHING
 	App->textures->Unload(ball_tex);
+	App->textures->Unload(leftFlipper_tex);
+	App->textures->Unload(rightFlipper_tex);
 	App->textures->Unload(numLives_tex0);
 	App->textures->Unload(numLives_tex1);
 	App->textures->Unload(numLives_tex2);
@@ -73,6 +77,13 @@ update_status ModuleSceneIntro::Update()
 		ball->GetPosition(x, y);
 		App->renderer->Blit(ball_tex, x, y, NULL, 1.0f, ball->GetRotation());
 	}
+		//FLIPPERS
+	//LEFT
+	if (leftFlipper != NULL) {
+		int x, y;
+		leftFlipper->GetPosition(x, y);
+		App->renderer->Blit(leftFlipper_tex, x, y, NULL, 1.0f, leftFlipper->GetRotation());
+	}
 
 
 
@@ -105,6 +116,28 @@ bool ModuleSceneIntro::LoadMap() {
 	ball->body->GetFixtureList()->SetFriction(0.4f);
 	ball->listener = this;
 	numLives = 3;
+
+	//FLIPPERS
+	//LEFT
+	leftFlipper = App->physics->CreateRectangle(195, 705, 85, 13);
+
+
+	//JOINTS-------------------------------------------------------------
+		//FLIPPERS
+			//LEFT
+	b2RevoluteJointDef leftFlipper_revolute;
+	PhysBody* circleLeft;
+	circleLeft = App->physics->CreateCircle(155, 705, 5);
+	circleLeft->body->SetType(b2_staticBody);
+	leftFlipper_revolute.Initialize(leftFlipper->body, circleLeft->body, circleLeft->body->GetWorldCenter());
+	leftFlipper_revolute.collideConnected = false;
+	leftFlipper_revolute.enableLimit = true;
+	leftFlipper_revolute.lowerAngle = -20 * DEGTORAD;
+	leftFlipper_revolute.upperAngle = 30 * DEGTORAD;
+	leftFlipper_joint = (b2RevoluteJoint*)App->physics->world->CreateJoint(&leftFlipper_revolute);
+	//RIGHT
+	b2RevoluteJointDef rightFlipper_revolute;
+	PhysBody* circleRight;
 
 
 	death = App->physics->CreateRectangleSensor(0, 700, SCREEN_WIDTH * 2, 1);

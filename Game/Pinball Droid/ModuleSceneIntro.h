@@ -3,6 +3,7 @@
 #include "p2List.h"
 #include "p2Point.h"
 #include "Globals.h"
+#include "Box2D/Box2D/Box2D.h"
 
 class PhysBody;
 
@@ -23,18 +24,21 @@ public:
 private:
 	bool LoadMap();
 public:
-	p2List<PhysBody*> circles;
-	p2List<PhysBody*> boxes;
-	p2List<PhysBody*> ricks;
-	
 
 	PhysBody* sensor;
 	PhysBody* ball;
 	PhysBody* death;
+	PhysBody* rightFlipper;
+	PhysBody* leftFlipper;
+	b2RevoluteJoint* leftFlipper_joint;
+	b2RevoluteJoint* rightFlipper_joint;
+
 	bool sensed;
 
 	SDL_Texture* background_tex;
 	SDL_Texture* ball_tex;
+	SDL_Texture* leftFlipper_tex;
+	SDL_Texture* rightFlipper_tex;
 	SDL_Texture* numLives_tex0;
 	SDL_Texture* numLives_tex1;
 	SDL_Texture* numLives_tex2;
@@ -43,4 +47,7 @@ public:
 	uint bonus_fx;
 	p2Point<int> ray;
 	bool ray_on;
+	int life = 0;
+	bool alive = true;
+
 };
