@@ -257,38 +257,47 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB) {
 		}
 		if (bodyB == LeftTopLight) {
 			left_top_light_b = true;
+			App->ui->score_player += 100 * multiplier;
 			App->audio->PlayFx(light_fx);
 		}
 		if (bodyB == LeftMidLight){
 			left_mid_light_b = true;
+			App->ui->score_player += 100 * multiplier;
 			App->audio->PlayFx(light_fx);
 		}
 		if (bodyB == LeftBotLight) {
 			left_bot_light_b = true;
+			App->ui->score_player += 100 * multiplier;
 			App->audio->PlayFx(light_fx);
 		}
 		if (bodyB == midTopLight) {
 			mid_top_light_b = true;
+			App->ui->score_player += 100 * multiplier;
 			App->audio->PlayFx(light_fx);
 		}
 		if (bodyB == midMidLight) {
 			mid_mid_light_b = true;
+			App->ui->score_player += 100 * multiplier;
 			App->audio->PlayFx(light_fx);
 		}
 		if (bodyB == midBotLight) {
 			mid_bot_light_b = true;
+			App->ui->score_player += 100 * multiplier;
 			App->audio->PlayFx(light_fx);
 		}
 		if (bodyB == rightTopLight) {
 			right_top_light_b = true;
+			App->ui->score_player += 100 * multiplier;
 			App->audio->PlayFx(light_fx);
 		}
 		if (bodyB == rightMidLight) {
 			right_mid_light_b = true;
+			App->ui->score_player += 100 * multiplier;
 			App->audio->PlayFx(light_fx);
 		}
 		if (bodyB == rightTopLight) {
 			right_bot_light_b = true;
+			App->ui->score_player += 100 * multiplier;
 			App->audio->PlayFx(light_fx);
 		}
 		if (left_top_light_b == true && left_mid_light_b == true && left_bot_light_b == true) {
@@ -307,22 +316,9 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB) {
 			right_bot_light_b = false;
 		}
 
-	}
+		
 
-	//not working
-	//if (App->ui->Score >= 10 && App->ui->Score < 100) {
-	//	App->fonts->BlitText(205, 773, App->ui->font, App->ui->score);
-	//}
-	//else if (App->ui->Score >= 100 && App->ui->Score < 1000) {
-	//	App->fonts->BlitText(195, 773, App->ui->font, App->ui->score);
-	//}
-	//else if (App->ui->Score >= 1000 && App->ui->Score < 10000) {
-	//	App->fonts->BlitText(185, 773, App->ui->font, App->ui->score);
-	//}
-	//else if (App->ui->Score >= 10000) {
-	//	App->fonts->BlitText(175, 773, App->ui->font, App->ui->score);
-	//}
-	//else App->fonts->BlitText(215, 773, App->ui->font, App->ui->score);
+	}
 
 }
 bool ModuleSceneIntro::LoadMap() {
@@ -479,7 +475,7 @@ bool ModuleSceneIntro::LoadMap() {
 }
 void ModuleSceneIntro::gameOver() {
 
-	//App->ui->Score = 0; //not working
+	App->ui->score_player = 0; 
 	numLives = 3;
 	LeftTopLight = false;
 	LeftMidLight = false;
@@ -491,7 +487,6 @@ void ModuleSceneIntro::gameOver() {
 	rightTopLight = false;
 	rightMidLight = false;
 	rightBotLight = false;
-
 
 
 }
