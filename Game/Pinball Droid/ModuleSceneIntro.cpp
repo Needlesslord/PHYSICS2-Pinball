@@ -70,10 +70,10 @@ update_status ModuleSceneIntro::PreUpdate() {
 		}
 
 	if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT) {
-		leftFlipper->body->ApplyAngularImpulse(-2.0F, true);
+		leftFlipper->body->ApplyAngularImpulse(-4.0F, true);
 	}
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_M) == KEY_REPEAT) {
-		rightFlipper->body->ApplyAngularImpulse(2.0F, true);
+		rightFlipper->body->ApplyAngularImpulse(4.0F, true);
 	}
 	
 	//fx
