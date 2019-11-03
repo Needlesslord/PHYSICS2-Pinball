@@ -122,17 +122,31 @@ update_status ModuleSceneIntro::Update()
 		leftFlipper->GetPosition(x, y);
 		App->renderer->Blit(leftFlipper_tex, x, y - 10, NULL, 1.0f, leftFlipper->GetRotation());
 	}
+	//LEFT-UP
 	if (leftupFlipper != NULL) {
 		int x, y;
 		leftupFlipper->GetPosition(x, y);
 		App->renderer->Blit(leftupFlipper_tex, x, y - 10, NULL, 1.0f, leftFlipper->GetRotation());
 	}
+	//RIGHT
 	if (rightFlipper != NULL) {
 		int x, y;
 		rightFlipper->GetPosition(x, y);
 		App->renderer->Blit(rightFlipper_tex, x, y - 10, NULL, 1.0f, rightFlipper->GetRotation());
 	}
 
+	//Death and move ball to initial position
+	
+	if (isDead)
+	{
+		//código debug tecla 1
+		int x = initialPosition.x;
+		int y = initialPosition.y;
+		ball->body->GetWorld()->DestroyBody(ball->body);
+		ball = App->physics->CreateCircle(x, y, 15);
+		ball->listener = this;
+		isDead = false;
+	}
 
 	return UPDATE_CONTINUE;
 }
@@ -153,9 +167,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB) {
 		if (bodyB == death) {
 			numLives--;
 			//DOESN'T WORK FOR SOME REASON
-			ball->body->GetWorld()->DestroyBody(ball->body);
-			ball = App->physics->CreateCircle(initialPosition.x, initialPosition.y, 15);
-			ball->listener = this;
+			isDead = true;
 		}
 		if (bodyB == standby_sensor) {
 			standby = false;
