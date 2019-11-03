@@ -6,6 +6,7 @@
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
 #include "ModulePhysics.h"
+#include "Chain.h"
 
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -111,11 +112,17 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB) {
 }
 bool ModuleSceneIntro::LoadMap() {
 	//BALL FIRST
-	ball = App->physics->CreateCircle(SCREEN_WIDTH / 2, 0, 15);
+	ball = App->physics->CreateCircle(454, 421, 15);
 	ball->body->SetBullet(true);
 	ball->body->GetFixtureList()->SetFriction(0.4f);
 	ball->listener = this;
 	numLives = 3;
+
+	//BACKGROUND
+	background = App->physics->CreateChain(0, 0, Background, 180);
+	background->body->SetType(b2_staticBody);
+	backgroundL = App->physics->CreateChain(0, 0, BackgroundL, 14);
+	backgroundL->body->SetType(b2_staticBody);
 
 	//FLIPPERS
 	//LEFT

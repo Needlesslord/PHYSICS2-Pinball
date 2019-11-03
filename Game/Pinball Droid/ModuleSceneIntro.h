@@ -27,9 +27,13 @@ public:
 
 	PhysBody* sensor;
 	PhysBody* ball;
+	PhysBody* background;
+	PhysBody* backgroundL;
+
 	PhysBody* death;
 	PhysBody* rightFlipper;
 	PhysBody* leftFlipper;
+
 	b2RevoluteJoint* leftFlipper_joint;
 	b2RevoluteJoint* rightFlipper_joint;
 
