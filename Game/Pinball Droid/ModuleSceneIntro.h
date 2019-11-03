@@ -83,5 +83,6 @@ public:
 	int life = 0;
 	bool alive = true;
 	bool standby = true;
+	uint intensity = 0;
 
 };
