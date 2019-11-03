@@ -283,7 +283,16 @@ bool ModuleSceneIntro::LoadMap() {
 		//DEATH
 	death = App->physics->CreateRectangleSensor(0, 790, SCREEN_WIDTH * 2, 1);
 		//STANDBY
-	standby_sensor =
-		App->physics->CreateRectangleSensor(390, 20, 1, 25);
+	standby_sensor = App->physics->CreateRectangleSensor(390, 20, 1, 25);
+		//x5, x10, x20
+	sensor_x5up = App->physics->CreateRectangleSensor(202, 32, 5, 5);
+	sensor_x5right = App->physics->CreateRectangleSensor(400, 65, 5, 5);
+	sensor_x10 = App->physics->CreateRectangleSensor(415, 256, 5, 5);
+	sensor_x20 = App->physics->CreateRectangleSensor(25, 720, 5, 5);
+	//ARROWS
+	sensor_arrows_upright = App->physics->CreateRectangleSensor(15, 75, 5, 5);
+	sensor_arrows_uprleft = App->physics->CreateRectangleSensor(150, 70, 5, 5);
+	sensor_arrows_left = App->physics->CreateRectangleSensor(15, 245, 5, 5);
+
 	return true;
 }

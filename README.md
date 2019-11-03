@@ -28,14 +28,14 @@ It has been done only for educational purposes
 
 	GitHub: tomascarreras1000
 
-	Tomás has been in charge of flippers, kicker, chains, background, Base Code
+	Tomás has been in charge of flippers, kicker, chains, background, Base Code, ball, sensors
 
 
 **Programmer and Management:** Núria Lamonja
 
 	GitHub:	 needlesslord
 
-	Núria has been in charge of flippers, kicker, chains, UI and Fonts, p2Animation, Base Code, README.md
+	Núria has been in charge of flippers, kicker, chains, UI and Fonts, p2Animation, Base Code, README.md, sensors and combos
 
 
 **Programmer:** Dani Ruiz

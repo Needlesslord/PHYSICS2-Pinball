@@ -56,8 +56,6 @@ public:
 	PhysBody* light8;
 	PhysBody* light9;
 	PhysBody* light10;
-		
-
 
 	PhysBody* death;
 	PhysBody* standby_sensor;
@@ -109,6 +107,17 @@ public:
 	bool OnLight8 = false;
 	bool OnLight9 = false;
 	bool OnLight10 = false;
+	
+	//sensors x5, x10, x20
+	PhysBody* sensor_x5up;
+	PhysBody* sensor_x5right;
+	PhysBody* sensor_x10;
+	PhysBody* sensor_x20;
+	//sensors arrows
+	PhysBody* sensor_arrows_upright;
+	PhysBody* sensor_arrows_uprleft;
+	PhysBody* sensor_arrows_left;
+
 
 
 
