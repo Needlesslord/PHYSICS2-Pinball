@@ -75,6 +75,7 @@
     <ClInclude Include="Globals.h" />
     <ClInclude Include="ModuleFonts.h" />
     <ClInclude Include="ModulePhysics.h" />
+    <ClInclude Include="ModuleTutorial.h" />
     <ClInclude Include="ModuleUI.h" />
     <ClInclude Include="p2Animation.h" />
     <ClInclude Include="p2List.h" />
@@ -101,6 +102,7 @@
     <ClCompile Include="ModuleRender.cpp" />
     <ClCompile Include="ModuleSceneIntro.cpp" />
     <ClCompile Include="ModuleTextures.cpp" />
+    <ClCompile Include="ModuleTutorial.cpp" />
     <ClCompile Include="ModuleUI.cpp" />
     <ClCompile Include="ModuleWindow.cpp" />
   </ItemGroup>

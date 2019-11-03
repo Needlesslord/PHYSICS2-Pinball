@@ -13,7 +13,9 @@ It has been done only for educational purposes
 	MAIN DIFFERENCES:
 
 		Tutorial and Menu Pause not implemented
-		
+		Not all combos and score implemented
+		Holes do not count for score
+		Images of "fire" and "green" for Kicker and bouncers do not work		
 
 
 

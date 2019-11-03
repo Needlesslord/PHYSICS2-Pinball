@@ -71,6 +71,9 @@
     <ClInclude Include="Chain.h">
       <Filter>Header Files\Containers</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleTutorial.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -111,6 +114,9 @@
     </ClCompile>
     <ClCompile Include="ModuleUI.cpp">
       <Filter>UI+Fonts</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleTutorial.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
